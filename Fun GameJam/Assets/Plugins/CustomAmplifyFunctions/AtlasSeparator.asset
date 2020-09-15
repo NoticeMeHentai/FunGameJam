@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
+  m_Name: AtlasSeparator
+  m_EditorClassIdentifier: 
+  m_functionInfo: "// Made with Amplify Shader Editor\n// Available at the Unity Asset
+    Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=16600\n228;73;1175;696;2136.982;1400.362;2.109457;True;False\nNode;AmplifyShaderEditor.FunctionInput;48;19.7569,9.126379;Float;False;NormalScale;1;0;True;1;0;FLOAT;1;False;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionSwitch;59;-1023.977,-860.4129;Float;False;AtlasSelection;False;3;4;-1;UpLeft;UpRight;DownLeft;DownRight;Instance;54;9;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionSwitch;54;-1017.435,-1018.22;Float;False;AtlasSelection;False;3;4;-1;UpLeft;UpRight;DownLeft;DownRight;Object;-1;9;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.Vector3Node;58;-1534.007,-976.8533;Float;False;Constant;_Vector0;Vector
+    0;0;0;Create;True;0;0;False;0;0.01,0.5,0.99;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3\nNode;AmplifyShaderEditor.FunctionInput;25;-1396.868,-193.0768;Float;False;Tiling;2;3;True;1;0;FLOAT2;2,2;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.SimpleMultiplyOpNode;26;-1160.236,-242.8357;Float;True;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.LerpOp;51;-546.6034,-802.2212;Float;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionSwitch;55;-1020.777,-492.4127;Float;False;AtlasSelection;False;3;4;-1;UpLeft;UpRight;DownLeft;DownRight;Instance;54;9;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.BreakToComponentsNode;53;-818.7043,-288.0878;Float;False;FLOAT2;1;0;FLOAT2;0,0;False;16;FLOAT;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT;5;FLOAT;6;FLOAT;7;FLOAT;8;FLOAT;9;FLOAT;10;FLOAT;11;FLOAT;12;FLOAT;13;FLOAT;14;FLOAT;15\nNode;AmplifyShaderEditor.Vector4Node;64;-1634.233,-612.5978;Float;False;Constant;_Vector1;Vector
+    1;1;0;Create;True;0;0;False;0;0.01,0.499,0.501,0.999;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.FractNode;52;-937.0946,-278.4281;Float;False;1;0;FLOAT2;0,0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.TexturePropertyNode;63;-323.513,-552.5145;Float;True;Property;_Texture0;Texture
+    0;0;0;Create;True;0;0;False;0;3d7819190bad1bd48b36c2c3925ff18a;ca6a0a09d133ffc48a446db6d2c82e55;False;white;Auto;Texture2D;0;1;SAMPLER2D;0\nNode;AmplifyShaderEditor.SamplerNode;46;257.6607,-93.00558;Float;True;Property;_TextureSample1;Texture
+    Sample 1;0;0;Create;True;0;0;False;0;None;None;True;0;False;white;Auto;True;Object;-1;MipLevel;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.FunctionSwitch;47;531.5272,-261.4773;Float;False;Normal;True;0;2;-1;In
+    0;In 1;Object;-1;9;0;COLOR;0,0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;COLOR;0\nNode;AmplifyShaderEditor.SamplerNode;24;178.8255,-395.3196;Float;True;Property;_TextureSample0;Texture
+    Sample 0;0;0;Create;True;0;0;False;0;None;None;True;0;False;white;Auto;False;Object;-1;MipLevel;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.TextureCoordinatesNode;6;-1640.53,-248.9927;Float;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.FunctionInput;5;-10.4264,-392.6781;Float;False;Sampler2D;9;2;True;1;0;SAMPLER2D;;False;1;SAMPLER2D;0\nNode;AmplifyShaderEditor.DynamicAppendNode;62;-302.1144,-240.495;Float;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0\nNode;AmplifyShaderEditor.LerpOp;61;-522.7231,-457.8449;Float;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionInput;45;-126.7245,-279.4614;Float;False;MipMapLevel;0;1;True;1;0;INT;0;False;1;INT;0\nNode;AmplifyShaderEditor.FunctionSwitch;60;-1022.377,-655.4128;Float;False;AtlasSelection;False;3;4;-1;UpLeft;UpRight;DownLeft;DownRight;Instance;54;9;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionOutput;0;737.0396,-266.093;Float;False;True;ChosenTexture;0;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0\nWireConnection;59;0;64;2\nWireConnection;59;1;64;4\nWireConnection;59;2;64;2\nWireConnection;59;3;64;4\nWireConnection;54;0;64;1\nWireConnection;54;1;64;3\nWireConnection;54;2;64;1\nWireConnection;54;3;64;3\nWireConnection;26;0;6;0\nWireConnection;26;1;25;0\nWireConnection;51;0;54;0\nWireConnection;51;1;59;0\nWireConnection;51;2;53;0\nWireConnection;55;0;64;4\nWireConnection;55;1;64;4\nWireConnection;55;2;64;2\nWireConnection;55;3;64;2\nWireConnection;53;0;52;0\nWireConnection;52;0;26;0\nWireConnection;46;0;5;0\nWireConnection;46;1;62;0\nWireConnection;46;2;45;0\nWireConnection;46;5;48;0\nWireConnection;47;0;24;0\nWireConnection;47;1;46;0\nWireConnection;24;0;5;0\nWireConnection;24;1;62;0\nWireConnection;24;2;45;0\nWireConnection;62;0;51;0\nWireConnection;62;1;61;0\nWireConnection;61;0;60;0\nWireConnection;61;1;55;0\nWireConnection;61;2;53;1\nWireConnection;60;0;64;3\nWireConnection;60;1;64;3\nWireConnection;60;2;64;1\nWireConnection;60;3;64;1\nWireConnection;0;0;47;0\nASEEND*/\n//CHKSM=2E68E0209A13ABEBF10AE1051AB475D21AFB3BD8"
+  m_functionName: 
+  m_description: 'Crops the Atlas to get the desired piece of the texture.
+
+    Kiki'
+  m_additionalIncludes:
+    m_additionalIncludes: []
+    m_outsideIncludes: []
+  m_additionalPragmas:
+    m_additionalPragmas: []
+    m_outsidePragmas: []
+  m_additionalDirectives:
+    m_validData: 0
+    m_isDirty: 0
+    m_moduleName: ' Additional Directives'
+    m_independentModule: 1
+    m_additionalDirectives: []
+    m_shaderFunctionDirectives: []
+    m_nativeDirectives: []
+    m_nativeDirectivesFoldout: 0
+    m_directivesSaveItems: []
+  m_nodeCategory: 3
+  m_customNodeCategory: 
+  m_previewPosition: 0
+  m_hidden: 0
