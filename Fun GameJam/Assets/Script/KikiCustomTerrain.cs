@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KikiCustomTerrain : MonoBehaviour
 {
+    [InstanceButton(typeof(KikiCustomTerrain),nameof(RegenerateTerrain))]
     public Texture2D Heightmap;
     public Texture2D Maskmap;
 
