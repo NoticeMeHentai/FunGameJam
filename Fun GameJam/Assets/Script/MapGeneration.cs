@@ -20,7 +20,6 @@ public class MapGeneration : MonoBehaviour
     private Mesh mTerrain;
     public int mNbrObjectToSpawn = 10;
     public GameObject mCubeTest;
-    private Vector2 mCurrentpoint;
     private Vector3 mHalfExtents = new Vector3(1f, 0, 1f);
     private int mNbrSpawned = 0;
     private int mNbrFailed = 0;
@@ -30,6 +29,8 @@ public class MapGeneration : MonoBehaviour
 
     private bool mSpawned = false;
     public int mMaxTryIteration = 5;
+
+    public LayerMask mSpawnObjectLayerMask;
 
     private void RegenerateTerrain()
     {
@@ -172,21 +173,20 @@ public class MapGeneration : MonoBehaviour
             int nbrOfTry = 0;
             while(!mSpawned && nbrOfTry < mMaxTryIteration)
             {
-                mCurrentpoint = new Vector2(Random.Range(0, mMapSizeX), Random.Range(0, mMapSizeY));
-                Vector3 mCurrentPosition = transform.position + new Vector3(mCurrentpoint.x, 0.0f, mCurrentpoint.y)
-                                           + new Vector3(-mMapSizeX / 2, 15, -mMapSizeY / 2);
-                if (!Physics.BoxCast(mCurrentPosition + Vector3.up * 10, mHalfExtents, -Vector3.up, Quaternion.identity, 50.0f) 
-                    && Physics.Raycast(mCurrentPosition, -Vector3.up, out mHit, 50.0f))
-                {
+                Vector3 currentPosition = transform.position + new Vector3(Random.Range(0, mMapSizeX), 0.0f, Random.Range(0, mMapSizeY))+ new Vector3(-mMapSizeX / 2, 15, -mMapSizeY / 2);
+                float randomRotationY = Random.Range(0, 360);
 
-                    //Renderer renderer = mHit.transform.GetComponent<MeshRenderer>();
+                if (!Physics.BoxCast(currentPosition + Vector3.up * 10, mHalfExtents, -Vector3.up, Quaternion.identity, 50.0f, mSpawnObjectLayerMask) 
+                    && Physics.Raycast(currentPosition, -Vector3.up, out mHit, 50.0f))
+                {
                     Vector2 pixelUV = mHit.textureCoord;
                     pixelUV.x *= -mMaskmap.width;
                     pixelUV.y *= -mMaskmap.height;
                     Color color = mMaskmap.GetPixel(Mathf.FloorToInt(pixelUV.x), Mathf.FloorToInt(pixelUV.y));
-                    if (color.r >= 0.9f)
+
+                    if (color.r >= 0.4f)
                     {
-                        mObjectsSpawned[i] = Instantiate(mCubeTest, mCurrentPosition, Quaternion.identity);
+                        mObjectsSpawned[i] = Instantiate(mCubeTest, mHit.point, Random.rotation);//Quaternion.Euler(0, randomRotationY,0));
                         mNbrSpawned++;
                         mSpawned = true;
                     }
