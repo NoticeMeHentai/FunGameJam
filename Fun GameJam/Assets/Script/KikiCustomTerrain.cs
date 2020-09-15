@@ -16,31 +16,10 @@ public class KikiCustomTerrain : MonoBehaviour
 
 
     private Mesh terrain;
-    private Mesh colliderTerrain;
 
-    public void RegenerateTerrain()
-    {
-        terrain = RegenerateTerrain(terrain, false);
-        colliderTerrain = RegenerateTerrain(colliderTerrain, true);
-        if (terrain && colliderTerrain)
-        {
-            MeshFilter meshFilter = GetComponent<MeshFilter>();
-            if (meshFilter == null)
-                meshFilter = gameObject.AddComponent<MeshFilter>();
-            meshFilter.mesh = terrain;
 
-            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-            if (meshRenderer == null)
-                meshRenderer = gameObject.AddComponent<MeshRenderer>();
 
-            MeshCollider meshCollider = GetComponent<MeshCollider>();
-            if (meshCollider == null)
-                meshCollider = gameObject.AddComponent<MeshCollider>();
-            meshCollider.sharedMesh = colliderTerrain;
-        }
-    }
-
-    private Mesh RegenerateTerrain(Mesh terrain, bool isCollider)
+    private void RegenerateTerrain()
     {
         Debug.Log("Building mesh");
         if (terrain != null)
@@ -147,7 +126,5 @@ public class KikiCustomTerrain : MonoBehaviour
         terrain.RecalculateNormals();
         terrain.RecalculateTangents();
         terrain.RecalculateBounds();
-
-        return terrain;
     }
 }
