@@ -18,7 +18,6 @@ public class KikiCustomTerrain : MonoBehaviour
     private Mesh terrain;
 
 
-
     private void RegenerateTerrain()
     {
         Debug.Log("Building mesh");
@@ -126,5 +125,19 @@ public class KikiCustomTerrain : MonoBehaviour
         terrain.RecalculateNormals();
         terrain.RecalculateTangents();
         terrain.RecalculateBounds();
+
+        MeshFilter meshFilter = GetComponent<MeshFilter>();
+        if (meshFilter == null)
+            meshFilter = gameObject.AddComponent<MeshFilter>();
+        meshFilter.mesh = terrain;
+
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer == null)
+            meshRenderer = gameObject.AddComponent<MeshRenderer>();
+
+        MeshCollider meshCollider = GetComponent<MeshCollider>();
+        if (meshCollider == null)
+            meshCollider = gameObject.AddComponent<MeshCollider>();
+        meshCollider.sharedMesh = terrain;
     }
 }
