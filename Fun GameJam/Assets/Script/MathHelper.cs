@@ -10,7 +10,7 @@ public static class MathHelper
     private static Vector3 VectorForward = new Vector3(0,0,1);
 
     private static int mGroundLayerMask = 0;
-    private static int _GroundLayerMask { get { if (mGroundLayerMask == 0) mGroundLayerMask = 1 << LayerMask.NameToLayer("Ground"); return mGroundLayerMask; } }
+    public static int GroundLayerMask { get { if (mGroundLayerMask == 0) mGroundLayerMask = 1 << LayerMask.NameToLayer("Ground"); return mGroundLayerMask; } }
 
 
     /// <summary>
@@ -181,8 +181,8 @@ public static class MathHelper
         RaycastHit hitInfo;
         for(int i = 0; i < steps; i++)
         {
-            if (Physics.Raycast(origin + directionTest*(steps-i)*singleStep, Vector3.down, out hitInfo, maxHeightTestDistance, _GroundLayerMask) 
-                || Physics.Raycast(origin + directionTest * (steps - i) * singleStep, Vector3.up, out hitInfo, maxHeightTestDistance, _GroundLayerMask))
+            if (Physics.Raycast(origin + directionTest*(steps-i)*singleStep, Vector3.down, out hitInfo, maxHeightTestDistance, GroundLayerMask) 
+                || Physics.Raycast(origin + directionTest * (steps - i) * singleStep, Vector3.up, out hitInfo, maxHeightTestDistance, GroundLayerMask))
             {
                 Debug.LogFormat("[MathHelper] Starting point:{0}, target direction{1}, target distance{2}, target found {3}, Red line: original point, blue line: target pos, white line: pos found", origin, directionTest, maxDistance, hitInfo.point);
                 Debug.DrawLine(origin, origin + Vector3.up * 3f, Color.red, 5f);
@@ -198,7 +198,7 @@ public static class MathHelper
     public static Vector3 PlaceGroundHeight(Vector3 origin, float offset = 0f)
     {
         RaycastHit hitInfo;
-        if (Physics.Raycast(origin, Vector3.down, out hitInfo, 5f, _GroundLayerMask) || Physics.Raycast(origin, Vector3.up, out hitInfo, 5f, _GroundLayerMask))
+        if (Physics.Raycast(origin, Vector3.down, out hitInfo, 5f, GroundLayerMask) || Physics.Raycast(origin, Vector3.up, out hitInfo, 5f, GroundLayerMask))
         {
             return hitInfo.point + Vector3.up * offset;
         }
