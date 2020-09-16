@@ -5,9 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class ObjectToSpawn
 {
-    public GameObject mObject;
+    public GameObject[] mObject;
     public int mNbrOfObject;
-    public int mRandomXYDegreeMax = 10;
+    public int mRandomXZDegreeMax = 10;
+    public float mMinDistbetweentwo = 1;
+    public float mGrounDepht = 0.5f;
+    public bool mIsFence = false;
 }
 public class MapGeneration : MonoBehaviour
 {
@@ -15,7 +18,7 @@ public class MapGeneration : MonoBehaviour
     public Texture2D mHeightmap;
     public Texture2D mMaskmap;
 
-    public GameObject mFence;
+    public GameObject[] mFence;
     public GameObject mElectricPillarAndWire;
     public GameObject mElectricPillar;
 
@@ -42,9 +45,11 @@ public class MapGeneration : MonoBehaviour
     private RaycastHit mHit;
 
     private bool mSpawned = false;
+    private bool mNextFenceSpawned = false;
     public int mMaxTryIteration = 5;
 
     public LayerMask mSpawnObjectLayerMask;
+    public LayerMask mGroundMask;
 
     public int mFenceNbrOnSide = 20;
     public int mFenceRandomYSidesDegreeMax = 8;
@@ -55,10 +60,15 @@ public class MapGeneration : MonoBehaviour
     public float mElectricPillarFrontSize = 15;
     public int mElectricPillarNbr = 5;
 
+    private GameObject mLastFenceSpawned;
+    public float mFenceFrontSize = 2.4f;
+    public float mFenceEspacement = 0.2f;
+    public float mNextFenceRandomYDegreeMax = 60;
+    public int mMaxFenceTogether = 4;
+
 
     private void RegenerateTerrain()
     {
-        Debug.Log("Building mesh");
         if (mTerrain != null)
             DestroyImmediate(mTerrain);
 
@@ -73,7 +83,6 @@ public class MapGeneration : MonoBehaviour
         if(transform.childCount >= 0)
         {
             mNbrDestroyed = 0;
-            Debug.Log("Ihavechild");
             for (int i = transform.childCount -1 ; i > -1; i--)
             {
                 DestroyImmediate(transform.GetChild(i).gameObject);
@@ -189,7 +198,6 @@ public class MapGeneration : MonoBehaviour
             meshCollider = gameObject.AddComponent<MeshCollider>();
         meshCollider.sharedMesh = mTerrain;
 
-        GenerateElectricLines();
 
         for (int j = 0; j < mObjectClass.Length; j++)
         {
@@ -197,15 +205,16 @@ public class MapGeneration : MonoBehaviour
             {
 
                 int nbrOfTry = 0;
+                int randomProps = Random.Range(0, mObjectClass[j].mObject.Length);
 
                 while (!mSpawned && nbrOfTry < mMaxTryIteration)
                 {
                     Vector3 currentPosition = transform.position + new Vector3(Random.Range(0, mMapSizeX* mGameZoneRatio), 0.0f, Random.Range(0, mMapSizeY* mGameZoneRatio)) + new Vector3(-(mMapSizeX* mGameZoneRatio) / 2, 15, -(mMapSizeY* mGameZoneRatio) / 2);
-                    float randomRotationX = Random.Range(0, mObjectClass[j].mRandomXYDegreeMax);
+                    float randomRotationX = Random.Range(0, mObjectClass[j].mRandomXZDegreeMax);
                     float randomRotationY = Random.Range(0, 360);
-                    float randomRotationZ = Random.Range(0, mObjectClass[j].mRandomXYDegreeMax);
-
-                    if (!Physics.BoxCast(currentPosition + Vector3.up * 10, mHalfExtents, -Vector3.up, Quaternion.identity, 50.0f, mSpawnObjectLayerMask)
+                    float randomRotationZ = Random.Range(0, mObjectClass[j].mRandomXZDegreeMax);
+                    RaycastHit hit;
+                    if (!Physics.SphereCast(currentPosition + Vector3.up * 50, mObjectClass[j].mMinDistbetweentwo, -Vector3.up, out hit, 100.0f, mSpawnObjectLayerMask)
                         && Physics.Raycast(currentPosition, -Vector3.up, out mHit, 50.0f))
                     {
                         Vector2 pixelUV = mHit.textureCoord;
@@ -215,8 +224,54 @@ public class MapGeneration : MonoBehaviour
 
                         if (color.r >= 0.4f)
                         {
-                            GameObject objectsSpawned = Instantiate(mObjectClass[j].mObject, mHit.point - Vector3.up * 0.5f, Quaternion.Euler(randomRotationX, randomRotationY, randomRotationZ));
+                            GameObject objectsSpawned = Instantiate(mObjectClass[j].mObject[randomProps], mHit.point - Vector3.up * mObjectClass[j].mGrounDepht, Quaternion.Euler(randomRotationX, randomRotationY, randomRotationZ));
                             objectsSpawned.transform.parent = transform;
+
+
+                            if (mObjectClass[j].mIsFence)
+                            {
+                                mLastFenceSpawned = objectsSpawned;
+                                mLastFenceSpawned.transform.rotation = Quaternion.LookRotation(mHit.normal) * Quaternion.Euler(90, 0, 0);
+                                for (int k = 0; k < mMaxFenceTogether-1; k++)
+                                {
+
+                                    int nextFenceNbrOfTry = 0;
+                                    mNextFenceSpawned = false;
+                                    Debug.Log("!!" + mNextFenceSpawned + " " + nextFenceNbrOfTry);
+                                    while (!mNextFenceSpawned && nextFenceNbrOfTry < mMaxTryIteration)
+                                    {
+                                        Debug.Log("NextFence!!!!!");
+                                        if (!Physics.SphereCast(mLastFenceSpawned.transform.position + mLastFenceSpawned.transform.forward * mFenceFrontSize * 1.5f + Vector3.up * 50, mObjectClass[j].mMinDistbetweentwo / 2.2f, -Vector3.up, out hit, 100.0f, mSpawnObjectLayerMask)
+                                            && Physics.Raycast(mLastFenceSpawned.transform.position + mLastFenceSpawned.transform.forward * mFenceFrontSize + mLastFenceSpawned.transform.forward * mFenceEspacement + Vector3.up * 50, -Vector3.up, out mHit, 100.0f))
+                                        {
+                                            Vector2 nextFencepixelUV = mHit.textureCoord;
+                                            nextFencepixelUV.x *= -mMaskmap.width;
+                                            nextFencepixelUV.y *= -mMaskmap.height;
+                                            Color nextFencecolor = mMaskmap.GetPixel(Mathf.FloorToInt(nextFencepixelUV.x), Mathf.FloorToInt(nextFencepixelUV.y));
+                                            if (nextFencecolor.r >= 0.4f)
+                                            {
+                                                randomProps = Random.Range(0, mObjectClass[j].mObject.Length);
+                                                float nextFenceRandomRotationY = Random.Range(-mNextFenceRandomYDegreeMax, mNextFenceRandomYDegreeMax);
+                                                mLastFenceSpawned = Instantiate(mObjectClass[j].mObject[randomProps], mHit.point - Vector3.up * mObjectClass[j].mGrounDepht, Quaternion.Euler(0.0f, mLastFenceSpawned.transform.rotation.y * nextFenceRandomRotationY, 0.0f));
+                                                Physics.Raycast(mLastFenceSpawned.transform.position + mLastFenceSpawned.transform.forward * mFenceFrontSize * 0.5f + Vector3.up * 50, -Vector3.up, out mHit, 100.0f, mGroundMask);
+                                                mLastFenceSpawned.transform.rotation *= Quaternion.LookRotation(mHit.normal) * Quaternion.Euler(90, 0, 0);
+                                                mLastFenceSpawned.transform.parent = transform;
+                                                mNextFenceSpawned = true;
+                                            }
+                                            else
+                                            {
+                                                nextFenceNbrOfTry++;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            nextFenceNbrOfTry++;
+                                        }
+                                    }
+                                }
+                            }
+
+
                             mNbrSpawned++;
                             mSpawned = true;
                         }
@@ -224,6 +279,10 @@ public class MapGeneration : MonoBehaviour
                         {
                             nbrOfTry++;
                         }
+                    }
+                    else
+                    {
+                        nbrOfTry++;
                     }
                 }
                 if (nbrOfTry >= mMaxTryIteration)
@@ -236,10 +295,12 @@ public class MapGeneration : MonoBehaviour
         Debug.Log("Destroyed : "+ mNbrDestroyed +"| failed : " + mNbrFailed + "| spawned : " + mNbrSpawned);
         mNbrFailed = 0;
         mNbrSpawned = 0;
+        GenerateElectricLines();
         GenerateFenceBounds();
     }
     public void GenerateFenceBounds()
     {
+        float mFenceHeight = mHeight - 0.2f;
         for (int j = 0; j < 4;j++)
         {
             for (int i = 0; i < mFenceNbrOnSide; i++)
@@ -247,26 +308,27 @@ public class MapGeneration : MonoBehaviour
                 float randomRotationY = Random.Range(-mFenceRandomYSidesDegreeMax, mFenceRandomYSidesDegreeMax);
                 float randomRotationSide = Random.Range(-mFenceRandomYSidesDegreeMax, mFenceRandomYSidesDegreeMax);
                 float randomOffset = Random.Range(-mFenceRandomXOffsetMax, mFenceRandomXOffsetMax);
+                int randomProps = Random.Range(0, mFence.Length);
 
-                if(j == 0)
+                if (j == 0)
                 {
-                    GameObject objectsSpawned = Instantiate(mFence, transform.position + new Vector3(randomOffset, 0.0f, 0.0f) + new Vector3(-mMapSizeX / 2, mHeight, -mMapSizeY / 2) + new Vector3(0.0f, 0.0f, (mMapSizeY/mFenceNbrOnSide) * i), Quaternion.Euler(0.0f, randomRotationY, randomRotationSide));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(randomOffset, 0.0f, 0.0f) + new Vector3(-mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3(0.0f, 0.0f, (mMapSizeY/mFenceNbrOnSide) * i), Quaternion.Euler(0.0f, randomRotationY, randomRotationSide));
                     objectsSpawned.transform.parent = transform;
 
                 }
                 else if (j == 1)
                 {
-                    GameObject objectsSpawned = Instantiate(mFence, transform.position + new Vector3(randomOffset, 0.0f, 0.0f) + new Vector3(mMapSizeX / 2, mHeight, -mMapSizeY / 2) + new Vector3(0.0f, 0.0f, (mMapSizeY / mFenceNbrOnSide) * i), Quaternion.Euler(0.0f, randomRotationY, randomRotationSide));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(randomOffset, 0.0f, 0.0f) + new Vector3(mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3(0.0f, 0.0f, (mMapSizeY / mFenceNbrOnSide) * i), Quaternion.Euler(0.0f, randomRotationY, randomRotationSide));
                     objectsSpawned.transform.parent = transform;
                 }
                 else if (j == 2)
                 {
-                    GameObject objectsSpawned = Instantiate(mFence, transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mHeight, -mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f)*Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f)*Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
                     objectsSpawned.transform.parent = transform;
                 }
                 else
                 {
-                    GameObject objectsSpawned = Instantiate(mFence, transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mHeight, mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f)*Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mFenceHeight, mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f)*Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
                     objectsSpawned.transform.parent = transform;
                 }
             }
@@ -291,5 +353,9 @@ public class MapGeneration : MonoBehaviour
             }
 
         }
+    }
+    public void GenerateMiddleFence()
+    {
+
     }
 }
