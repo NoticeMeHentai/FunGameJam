@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class ObjectToSpawn
 {
-    public GameObject mObject;
+    public GameObject[] mObject;
     public int mNbrOfObject;
     public int mRandomXZDegreeMax = 10;
     public float mMinDistbetweentwo = 1;
@@ -18,7 +18,7 @@ public class MapGeneration : MonoBehaviour
     public Texture2D mHeightmap;
     public Texture2D mMaskmap;
 
-    public GameObject mFence;
+    public GameObject[] mFence;
     public GameObject mElectricPillarAndWire;
     public GameObject mElectricPillar;
 
@@ -205,6 +205,7 @@ public class MapGeneration : MonoBehaviour
             {
 
                 int nbrOfTry = 0;
+                int randomProps = Random.Range(0, mObjectClass[j].mObject.Length);
 
                 while (!mSpawned && nbrOfTry < mMaxTryIteration)
                 {
@@ -223,7 +224,7 @@ public class MapGeneration : MonoBehaviour
 
                         if (color.r >= 0.4f)
                         {
-                            GameObject objectsSpawned = Instantiate(mObjectClass[j].mObject, mHit.point - Vector3.up * mObjectClass[j].mGrounDepht, Quaternion.Euler(randomRotationX, randomRotationY, randomRotationZ));
+                            GameObject objectsSpawned = Instantiate(mObjectClass[j].mObject[randomProps], mHit.point - Vector3.up * mObjectClass[j].mGrounDepht, Quaternion.Euler(randomRotationX, randomRotationY, randomRotationZ));
                             objectsSpawned.transform.parent = transform;
 
 
@@ -249,9 +250,9 @@ public class MapGeneration : MonoBehaviour
                                             Color nextFencecolor = mMaskmap.GetPixel(Mathf.FloorToInt(nextFencepixelUV.x), Mathf.FloorToInt(nextFencepixelUV.y));
                                             if (nextFencecolor.r >= 0.4f)
                                             {
-                                    
+                                                randomProps = Random.Range(0, mObjectClass[j].mObject.Length);
                                                 float nextFenceRandomRotationY = Random.Range(-mNextFenceRandomYDegreeMax, mNextFenceRandomYDegreeMax);
-                                                mLastFenceSpawned = Instantiate(mObjectClass[j].mObject, mHit.point - Vector3.up * mObjectClass[j].mGrounDepht, Quaternion.Euler(0.0f, mLastFenceSpawned.transform.rotation.y * nextFenceRandomRotationY, 0.0f));
+                                                mLastFenceSpawned = Instantiate(mObjectClass[j].mObject[randomProps], mHit.point - Vector3.up * mObjectClass[j].mGrounDepht, Quaternion.Euler(0.0f, mLastFenceSpawned.transform.rotation.y * nextFenceRandomRotationY, 0.0f));
                                                 Physics.Raycast(mLastFenceSpawned.transform.position + mLastFenceSpawned.transform.forward * mFenceFrontSize * 0.5f + Vector3.up * 50, -Vector3.up, out mHit, 100.0f, mGroundMask);
                                                 mLastFenceSpawned.transform.rotation *= Quaternion.LookRotation(mHit.normal) * Quaternion.Euler(90, 0, 0);
                                                 mLastFenceSpawned.transform.parent = transform;
@@ -307,26 +308,27 @@ public class MapGeneration : MonoBehaviour
                 float randomRotationY = Random.Range(-mFenceRandomYSidesDegreeMax, mFenceRandomYSidesDegreeMax);
                 float randomRotationSide = Random.Range(-mFenceRandomYSidesDegreeMax, mFenceRandomYSidesDegreeMax);
                 float randomOffset = Random.Range(-mFenceRandomXOffsetMax, mFenceRandomXOffsetMax);
+                int randomProps = Random.Range(0, mFence.Length);
 
-                if(j == 0)
+                if (j == 0)
                 {
-                    GameObject objectsSpawned = Instantiate(mFence, transform.position + new Vector3(randomOffset, 0.0f, 0.0f) + new Vector3(-mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3(0.0f, 0.0f, (mMapSizeY/mFenceNbrOnSide) * i), Quaternion.Euler(0.0f, randomRotationY, randomRotationSide));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(randomOffset, 0.0f, 0.0f) + new Vector3(-mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3(0.0f, 0.0f, (mMapSizeY/mFenceNbrOnSide) * i), Quaternion.Euler(0.0f, randomRotationY, randomRotationSide));
                     objectsSpawned.transform.parent = transform;
 
                 }
                 else if (j == 1)
                 {
-                    GameObject objectsSpawned = Instantiate(mFence, transform.position + new Vector3(randomOffset, 0.0f, 0.0f) + new Vector3(mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3(0.0f, 0.0f, (mMapSizeY / mFenceNbrOnSide) * i), Quaternion.Euler(0.0f, randomRotationY, randomRotationSide));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(randomOffset, 0.0f, 0.0f) + new Vector3(mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3(0.0f, 0.0f, (mMapSizeY / mFenceNbrOnSide) * i), Quaternion.Euler(0.0f, randomRotationY, randomRotationSide));
                     objectsSpawned.transform.parent = transform;
                 }
                 else if (j == 2)
                 {
-                    GameObject objectsSpawned = Instantiate(mFence, transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f)*Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f)*Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
                     objectsSpawned.transform.parent = transform;
                 }
                 else
                 {
-                    GameObject objectsSpawned = Instantiate(mFence, transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mFenceHeight, mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f)*Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mFenceHeight, mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f)*Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
                     objectsSpawned.transform.parent = transform;
                 }
             }
