@@ -48,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        SlowRatio = 1f;
+
+        GameManager.OnGameReady += delegate { SlowRatio = 0f; transform.position = WifiManager.sClosestWifiPoint.transform.position; };
         if(sInstance != null)
         {
             Debug.Log("[Player] There was already an instance, wtf");
@@ -134,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         //Rotation
         if (mDirection.magnitude > 0.01f)
             transform.rotation = Quaternion.Lerp(transform.rotation,
-                Quaternion.LookRotation(mDirection), mRotationSpeed * Time.deltaTime);
+                Quaternion.LookRotation(mDirection), mRotationSpeed * Time.deltaTime*(1 - SlowRatio));
         mDirection *= mCurrentSpeed * Time.deltaTime;
 
 

@@ -7,22 +7,39 @@ public class WifiPoint : MonoBehaviour
     //Editor utilites
     public float mRadius = 3f;
     [HideInInspector]public Color mColorToGizmos = Color.blue;
+    [HideInInspector] public float mIDMask = 0f;
+    [HideInInspector] public int mIDCounter = 0;
 
 
 
     private SphereCollider mSphereCollider;
     private SphereCollider _Collider { get { if (mSphereCollider == null) mSphereCollider = GetComponentInChildren<SphereCollider>(); return mSphereCollider; } }
 
-
     /// <summary>
     /// Returns a random point among the next points available
     /// </summary>
     /// <returns></returns>
-    public WifiPoint GetRandomNextWifiPoint()
+    public WifiPoint GetRandomNextWifiPoint(WifiPoint origin)
     {
-        if (mWifiPoints.Count > 0)
-            return mWifiPoints[Random.Range(0, mWifiPoints.Count)];
-        return this;
+        if (mWifiPoints.Count > 1)
+        {
+            bool mHasFoundNewPoint = false;
+            while (!mHasFoundNewPoint)
+            {
+                int randomIndex = Random.Range(0, mWifiPoints.Count);
+                if (mWifiPoints[randomIndex] != origin)
+                    return mWifiPoints[randomIndex];
+            }
+        }
+        return origin;
+            
+    }
+
+    public void Initialize(int IDCounter, float IDmask, List<WifiPoint> reference, float radius = 3f)
+    {
+        mIDCounter = IDCounter;
+        mIDMask = IDmask;
+
     }
     
 

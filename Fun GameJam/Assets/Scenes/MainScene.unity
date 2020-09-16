@@ -120,6 +120,73 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &12364188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 12364191}
+  - component: {fileID: 12364189}
+  - component: {fileID: 12364190}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &12364189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12364188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1766165346}
+  - {fileID: 503904703}
+  - {fileID: 1021289469}
+  - {fileID: 1065158296}
+  - {fileID: 1103101077}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.7979798
+  mIDCounter: 57
+--- !u!135 &12364190
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12364188}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &12364191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12364188}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 39.94783, y: 0, z: 4.4985275}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &21620423
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 21620424}
+  - component: {fileID: 21620425}
   m_Layer: 0
   m_Name: '[GameManager]'
   m_TagString: Untagged
@@ -146,9 +214,92 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 353272729}
   m_Father: {fileID: 61062365}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &21620425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21620423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae24e7d9be499c46b459bd0b7d8d5d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mHasMenu: 0
+--- !u!1 &42378455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 42378458}
+  - component: {fileID: 42378456}
+  - component: {fileID: 42378457}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &42378456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42378455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 84304091}
+  - {fileID: 406989377}
+  - {fileID: 234027771}
+  - {fileID: 143807358}
+  - {fileID: 1157593056}
+  - {fileID: 287731815}
+  - {fileID: 1307825891}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.43434343
+  mIDCounter: 23
+--- !u!135 &42378457
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42378455}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &42378458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42378455}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -26.806934, y: 0, z: -49.126038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &61062364
 GameObject:
@@ -184,6 +335,73 @@ Transform:
   - {fileID: 1245394192}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &84304090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 84304093}
+  - component: {fileID: 84304091}
+  - component: {fileID: 84304092}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &84304091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84304090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1431393431}
+  - {fileID: 406989377}
+  - {fileID: 234027771}
+  - {fileID: 143807358}
+  - {fileID: 42378456}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.4949495
+  mIDCounter: 3
+--- !u!135 &84304092
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84304090}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &84304093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84304090}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -29.227001, y: 0, z: -78.39689}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &95573900
 GameObject:
@@ -276,6 +494,421 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &143807357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 143807360}
+  - component: {fileID: 143807358}
+  - component: {fileID: 143807359}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &143807358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143807357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 84304091}
+  - {fileID: 1859666776}
+  - {fileID: 42378456}
+  - {fileID: 287731815}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.47474748
+  mIDCounter: 15
+--- !u!135 &143807359
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143807357}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &143807360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143807357}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.123024, y: 0, z: -65.365204}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &175842295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 175842296}
+  - component: {fileID: 175842297}
+  m_Layer: 0
+  m_Name: '[WifiSignal]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &175842296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175842295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &175842297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175842295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c65ec32e0b7004a9195d515bf28072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mMinMaxSpeed: {x: 5, y: 10}
+  mSpeedChanceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  mMinMaxSpeedChangeInterval: {x: 2, y: 5}
+  mSpeedIntervalChanceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  mMinMaxTransitionSpeedTime: {x: 0.5, y: 1}
+  mSpeedTransitionChanceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  mTriggerDistance: 1
+--- !u!1 &199923722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 199923723}
+  m_Layer: 0
+  m_Name: WifiWavePivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &199923723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199923722}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.27000025, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1724175695}
+  m_Father: {fileID: 1008005838}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &229330228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 229330231}
+  - component: {fileID: 229330229}
+  - component: {fileID: 229330230}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &229330229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229330228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1307825891}
+  - {fileID: 646491305}
+  - {fileID: 1471892896}
+  - {fileID: 1240891178}
+  - {fileID: 1579790811}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.34343433
+  mIDCounter: 43
+--- !u!135 &229330230
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229330228}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &229330231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229330228}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -30.287445, y: 0, z: -5.6676254}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &231050440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 231050443}
+  - component: {fileID: 231050441}
+  - component: {fileID: 231050442}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &231050441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231050440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1240891178}
+  - {fileID: 848141087}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.7070707
+  mIDCounter: 71
+--- !u!135 &231050442
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231050440}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &231050443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231050440}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -66.23813, y: 0, z: 46.409966}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &234027770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 234027773}
+  - component: {fileID: 234027771}
+  - component: {fileID: 234027772}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &234027771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234027770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1431393431}
+  - {fileID: 84304091}
+  - {fileID: 406989377}
+  - {fileID: 1157593056}
+  - {fileID: 42378456}
+  - {fileID: 1307825891}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.6060606
+  mIDCounter: 13
+--- !u!135 &234027772
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234027770}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &234027773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234027770}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -31.632805, y: 0, z: -57.29241}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &239520469
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +986,102 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239520469}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &287731814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 287731817}
+  - component: {fileID: 287731815}
+  - component: {fileID: 287731816}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &287731815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287731814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 143807358}
+  - {fileID: 42378456}
+  - {fileID: 1557723431}
+  - {fileID: 503904703}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.8181818
+  mIDCounter: 25
+--- !u!135 &287731816
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287731814}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &287731817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287731814}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.4348984, y: 0, z: -44.398567}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &353272728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 353272729}
+  m_Layer: 0
+  m_Name: '[StartingGamePoint]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &353272729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353272728}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 21620424}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &397991748
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +1111,139 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1008005838}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &402136554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 402136557}
+  - component: {fileID: 402136555}
+  - component: {fileID: 402136556}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &402136555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402136554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1103101077}
+  - {fileID: 481614025}
+  - {fileID: 1957138102}
+  - {fileID: 681756598}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.8080808
+  mIDCounter: 77
+--- !u!135 &402136556
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402136554}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &402136557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402136554}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 40.7685, y: 0, z: 46.11316}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &406989376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406989379}
+  - component: {fileID: 406989377}
+  - component: {fileID: 406989378}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &406989377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406989376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1431393431}
+  - {fileID: 84304091}
+  - {fileID: 234027771}
+  - {fileID: 1157593056}
+  - {fileID: 42378456}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.64646465
+  mIDCounter: 11
+--- !u!135 &406989378
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406989376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &406989379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406989376}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -63.389297, y: 0, z: -61.027637}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &448802423
 GameObject:
@@ -548,6 +1410,141 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!1 &481614024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 481614027}
+  - component: {fileID: 481614025}
+  - component: {fileID: 481614026}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &481614025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481614024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1579790811}
+  - {fileID: 1103101077}
+  - {fileID: 402136555}
+  - {fileID: 1007731347}
+  - {fileID: 1957138102}
+  - {fileID: 1740788132}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.36363637
+  mIDCounter: 75
+--- !u!135 &481614026
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481614024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &481614027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481614024}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.572769, y: 0, z: 48.23445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &503904702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 503904705}
+  - component: {fileID: 503904703}
+  - component: {fileID: 503904704}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &503904703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503904702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 287731815}
+  - {fileID: 1557723431}
+  - {fileID: 1065158296}
+  - {fileID: 12364189}
+  - {fileID: 1579790811}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.90909094
+  mIDCounter: 45
+--- !u!135 &503904704
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503904702}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &503904705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503904702}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 14.796265, y: 0, z: -11.18866}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &509680412
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,6 +1728,204 @@ Transform:
   m_Father: {fileID: 61062365}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &646491304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 646491307}
+  - component: {fileID: 646491305}
+  - component: {fileID: 646491306}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &646491305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646491304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1157593056}
+  - {fileID: 1325300962}
+  - {fileID: 1307825891}
+  - {fileID: 229330229}
+  - {fileID: 1471892896}
+  - {fileID: 1240891178}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.45454547
+  mIDCounter: 41
+--- !u!135 &646491306
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646491304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &646491307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646491304}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -62.22541, y: 0, z: -10.197876}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &681756597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 681756600}
+  - component: {fileID: 681756598}
+  - component: {fileID: 681756599}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &681756598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681756597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1103101077}
+  - {fileID: 402136555}
+  - {fileID: 1957138102}
+  - {fileID: 1354973925}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.4040404
+  mIDCounter: 87
+--- !u!135 &681756599
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681756597}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &681756600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681756597}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 46.8797, y: 0, z: 62.792877}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &848141086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 848141089}
+  - component: {fileID: 848141087}
+  - component: {fileID: 848141088}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &848141087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848141086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 231050441}
+  - {fileID: 1007731347}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.97979796
+  mIDCounter: 81
+--- !u!135 &848141088
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848141086}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &848141089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848141086}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -62.570854, y: 0, z: 63.838898}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &874047927
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +1975,74 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1007731346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1007731349}
+  - component: {fileID: 1007731347}
+  - component: {fileID: 1007731348}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1007731347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007731346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1240891178}
+  - {fileID: 1579790811}
+  - {fileID: 481614025}
+  - {fileID: 848141087}
+  - {fileID: 1957138102}
+  - {fileID: 1740788132}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.8989899
+  mIDCounter: 83
+--- !u!135 &1007731348
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007731346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1007731349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007731346}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -24.250774, y: 0, z: 56.951706}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1008005837
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,11 +2071,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008005837}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.46, y: 0, z: -1.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1347963307}
   - {fileID: 397991749}
+  - {fileID: 199923723}
   m_Father: {fileID: 61062365}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -880,13 +2144,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mAntennaTransform: {fileID: 1206238313}
   mRotationAntennaSpeed: 10
---- !u!4 &1206238313 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -3435991650861978607, guid: 55b2fab36bead5c4fa48cccc3aaf9e94,
-    type: 3}
-  m_PrefabInstance: {fileID: 1707408574}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1239445469
+  mScannerPivot: {fileID: 0}
+  mRefreshTimer: 0.5
+  mScannerDuraction: 0.25
+--- !u!1 &1021289468
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -894,42 +2155,341 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1239445470}
-  - component: {fileID: 1239445471}
-  m_Layer: 0
-  m_Name: '[Wifi]'
-  m_TagString: Untagged
+  - component: {fileID: 1021289471}
+  - component: {fileID: 1021289469}
+  - component: {fileID: 1021289470}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1239445470
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239445469}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1245394192}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1239445471
+--- !u!114 &1021289469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239445469}
+  m_GameObject: {fileID: 1021289468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c65ec32e0b7004a9195d515bf28072, type: 3}
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mStartingPoint: {fileID: 0}
+  mWifiPoints:
+  - {fileID: 1557723431}
+  - {fileID: 1766165346}
+  - {fileID: 12364189}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.28282827
+  mIDCounter: 48
+--- !u!135 &1021289470
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021289468}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1021289471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021289468}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 59.812897, y: 0, z: -8.777672}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1065158295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1065158298}
+  - component: {fileID: 1065158296}
+  - component: {fileID: 1065158297}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1065158296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065158295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 503904703}
+  - {fileID: 12364189}
+  - {fileID: 1579790811}
+  - {fileID: 1103101077}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.54545456
+  mIDCounter: 55
+--- !u!135 &1065158297
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065158295}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1065158298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065158295}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.313942, y: 0, z: 5.544426}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1103101076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1103101079}
+  - component: {fileID: 1103101077}
+  - component: {fileID: 1103101078}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1103101077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103101076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1065158296}
+  - {fileID: 12364189}
+  - {fileID: 1579790811}
+  - {fileID: 481614025}
+  - {fileID: 402136555}
+  - {fileID: 1957138102}
+  - {fileID: 681756598}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.57575756
+  mIDCounter: 66
+--- !u!135 &1103101078
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103101076}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1103101079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103101076}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 27.902542, y: 0, z: 30.609245}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1157593055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1157593058}
+  - component: {fileID: 1157593056}
+  - component: {fileID: 1157593057}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1157593056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157593055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1431393431}
+  - {fileID: 406989377}
+  - {fileID: 234027771}
+  - {fileID: 42378456}
+  - {fileID: 1325300962}
+  - {fileID: 1307825891}
+  - {fileID: 646491305}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.969697
+  mIDCounter: 21
+--- !u!135 &1157593057
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157593055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1157593058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157593055}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -60.535305, y: 0, z: -47.122684}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1206238313 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3435991650861978607, guid: 55b2fab36bead5c4fa48cccc3aaf9e94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1707408574}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1240891177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1240891180}
+  - component: {fileID: 1240891178}
+  - component: {fileID: 1240891179}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1240891178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240891177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 646491305}
+  - {fileID: 229330229}
+  - {fileID: 1471892896}
+  - {fileID: 1579790811}
+  - {fileID: 231050441}
+  - {fileID: 1007731347}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.18181819
+  mIDCounter: 62
+--- !u!135 &1240891179
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240891177}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1240891180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240891177}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -40.801117, y: 0, z: 20.870117}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1245394191
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,6 +2499,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1245394192}
+  - component: {fileID: 1245394193}
   m_Layer: 0
   m_Name: '[SignalsManager]'
   m_TagString: Untagged
@@ -954,13 +2515,224 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245394191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1239445470}
-  - {fileID: 3244349861242149313}
+  - {fileID: 175842296}
+  - {fileID: 1431393433}
+  - {fileID: 84304093}
+  - {fileID: 406989379}
+  - {fileID: 234027773}
+  - {fileID: 143807360}
+  - {fileID: 1859666778}
+  - {fileID: 1157593058}
+  - {fileID: 42378458}
+  - {fileID: 287731817}
+  - {fileID: 1557723433}
+  - {fileID: 1325300964}
+  - {fileID: 1307825893}
+  - {fileID: 1766165348}
+  - {fileID: 646491307}
+  - {fileID: 229330231}
+  - {fileID: 503904705}
+  - {fileID: 1021289471}
+  - {fileID: 1471892898}
+  - {fileID: 1065158298}
+  - {fileID: 12364191}
+  - {fileID: 1240891180}
+  - {fileID: 1579790813}
+  - {fileID: 1103101079}
+  - {fileID: 231050443}
+  - {fileID: 481614027}
+  - {fileID: 402136557}
+  - {fileID: 848141089}
+  - {fileID: 1007731349}
+  - {fileID: 1957138104}
+  - {fileID: 681756600}
+  - {fileID: 1354973927}
+  - {fileID: 1740788130}
   m_Father: {fileID: 61062365}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1245394193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245394191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b097c3a744122408c16039e6f160a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mDistance: 80
+  mSquareAmount: 10
+  mRandomMask: 0.18
+  mRandomMaxOffset: 0.334
+  mOffsetIntensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  mMinDistanceBetweenPoints: 3
+  mMaxDistanceLinkBetweenPoints: 40
+  mActive: 0
+  mPrefab: {fileID: 6731465307998981938, guid: d21ca5b5ccc132248bc1ee75eb448430, type: 3}
+  mInfo: "Shift + Left Click = Add \n Shift + Right Click = Relay \n Ctrl + Left Click
+    = Delete"
+--- !u!1 &1307825890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1307825893}
+  - component: {fileID: 1307825891}
+  - component: {fileID: 1307825892}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1307825891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307825890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 234027771}
+  - {fileID: 1157593056}
+  - {fileID: 42378456}
+  - {fileID: 1325300962}
+  - {fileID: 646491305}
+  - {fileID: 229330229}
+  - {fileID: 1471892896}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.3939394
+  mIDCounter: 32
+--- !u!135 &1307825892
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307825890}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1307825893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307825890}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -39.43333, y: 0, z: -26.680813}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1325300961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1325300964}
+  - component: {fileID: 1325300962}
+  - component: {fileID: 1325300963}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1325300962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325300961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1157593056}
+  - {fileID: 1307825891}
+  - {fileID: 646491305}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.7777778
+  mIDCounter: 30
+--- !u!135 &1325300963
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325300961}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1325300964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325300961}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -79.037155, y: 0, z: -21.307137}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1347963306
 GameObject:
@@ -1041,6 +2813,339 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347963306}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1354973924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1354973927}
+  - component: {fileID: 1354973925}
+  - component: {fileID: 1354973926}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1354973925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354973924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 681756598}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.42424244
+  mIDCounter: 89
+--- !u!135 &1354973926
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354973924}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1354973927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354973924}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 77.00726, y: 0, z: 65.87489}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 31
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1431393430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1431393433}
+  - component: {fileID: 1431393431}
+  - component: {fileID: 1431393432}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1431393431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431393430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 84304091}
+  - {fileID: 406989377}
+  - {fileID: 234027771}
+  - {fileID: 1157593056}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.5050505
+  mIDCounter: 1
+--- !u!135 &1431393432
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431393430}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1431393433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431393430}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -58.17123, y: 0, z: -75.1339}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1471892895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1471892898}
+  - component: {fileID: 1471892896}
+  - component: {fileID: 1471892897}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1471892896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471892895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1307825891}
+  - {fileID: 646491305}
+  - {fileID: 229330229}
+  - {fileID: 1240891178}
+  - {fileID: 1579790811}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.65656567
+  mIDCounter: 52
+--- !u!135 &1471892897
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471892895}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1471892898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471892895}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -39.13283, y: 0, z: 4.6493073}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1557723430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1557723433}
+  - component: {fileID: 1557723431}
+  - component: {fileID: 1557723432}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1557723431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557723430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1859666776}
+  - {fileID: 287731815}
+  - {fileID: 1766165346}
+  - {fileID: 503904703}
+  - {fileID: 1021289469}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.33333334
+  mIDCounter: 27
+--- !u!135 &1557723432
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557723430}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1557723433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557723430}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 40.89836, y: 0, z: -39.19996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1579790810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1579790813}
+  - component: {fileID: 1579790811}
+  - component: {fileID: 1579790812}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1579790811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579790810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 229330229}
+  - {fileID: 503904703}
+  - {fileID: 1471892896}
+  - {fileID: 1065158296}
+  - {fileID: 1240891178}
+  - {fileID: 1103101077}
+  - {fileID: 481614025}
+  - {fileID: 1007731347}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.85858583
+  mIDCounter: 64
+--- !u!135 &1579790812
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579790810}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1579790813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579790810}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.1796417, y: 0, z: 21.779442}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1707408574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1125,6 +3230,347 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55b2fab36bead5c4fa48cccc3aaf9e94, type: 3}
+--- !u!1 &1724175694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1724175695}
+  - component: {fileID: 1724175697}
+  - component: {fileID: 1724175696}
+  m_Layer: 0
+  m_Name: WifiWave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1724175695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724175694}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.44, z: 2.16}
+  m_LocalScale: {x: 3.544485, y: 5.024461, z: 1.3996}
+  m_Children: []
+  m_Father: {fileID: 199923723}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!23 &1724175696
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724175694}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 1b0682c7b10e17b4992af52499127ca2, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1724175697
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724175694}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1740788129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1740788130}
+  - component: {fileID: 1740788132}
+  - component: {fileID: 1740788131}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1740788130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740788129}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.8917465, y: 0, z: 78.96088}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 32
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1740788131
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740788129}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1740788132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740788129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 481614025}
+  - {fileID: 1007731347}
+  - {fileID: 1957138102}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.4848485
+  mIDCounter: 95
+--- !u!1 &1766165345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1766165348}
+  - component: {fileID: 1766165346}
+  - component: {fileID: 1766165347}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1766165346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766165345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1859666776}
+  - {fileID: 1557723431}
+  - {fileID: 1021289469}
+  - {fileID: 12364189}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.93939394
+  mIDCounter: 37
+--- !u!135 &1766165347
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766165345}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1766165348
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766165345}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 49.987503, y: 0, z: -32.41377}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1859666775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1859666778}
+  - component: {fileID: 1859666776}
+  - component: {fileID: 1859666777}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1859666776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859666775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 143807358}
+  - {fileID: 1557723431}
+  - {fileID: 1766165346}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.44444445
+  mIDCounter: 17
+--- !u!135 &1859666777
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859666775}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1859666778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859666775}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 43.36635, y: 0, z: -59.918396}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1957138101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1957138104}
+  - component: {fileID: 1957138102}
+  - component: {fileID: 1957138103}
+  m_Layer: 13
+  m_Name: WifiPoint(Clone)
+  m_TagString: WifiPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1957138102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957138101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58221de2bb1c7449113cbd844d92fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWifiPoints:
+  - {fileID: 1103101077}
+  - {fileID: 481614025}
+  - {fileID: 402136555}
+  - {fileID: 1007731347}
+  - {fileID: 681756598}
+  - {fileID: 1740788132}
+  mRadius: 3.71
+  mColorToGizmos: {r: 0, g: 0, b: 1, a: 1}
+  mIDMask: 0.67676765
+  mIDCounter: 85
+--- !u!135 &1957138103
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957138101}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.71
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1957138104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957138101}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10.758728, y: 0, z: 63.834473}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1245394192}
+  m_RootOrder: 29
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2038928168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 55b2fab36bead5c4fa48cccc3aaf9e94,
@@ -1179,88 +3625,3 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
---- !u!1001 &3244349861242149312
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1245394192}
-    m_Modifications:
-    - target: {fileID: -1087143217452386799, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_Radius
-      value: 3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6731465307998981938, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_Name
-      value: WifiPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 188940336469119775, guid: d21ca5b5ccc132248bc1ee75eb448430,
-        type: 3}
-      propertyPath: mRadius
-      value: 3.7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d21ca5b5ccc132248bc1ee75eb448430, type: 3}
---- !u!4 &3244349861242149313 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2582936215827260660, guid: d21ca5b5ccc132248bc1ee75eb448430,
-    type: 3}
-  m_PrefabInstance: {fileID: 3244349861242149312}
-  m_PrefabAsset: {fileID: 0}

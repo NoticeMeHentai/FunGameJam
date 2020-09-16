@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerConeWifiMat
+  m_Shader: {fileID: 4800000, guid: 08ce366277a2f944abfe92219d56d8c2, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AdditionalWifiMask:
+        m_Texture: {fileID: 2800000, guid: 908faea692e2bf94c841ffcf0eac2d6d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConeMasks:
+        m_Texture: {fileID: 2800000, guid: 44c3e5b469879d9428a9bf0a2c476626, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _CompleteWidth: 0.3
+    - _Cutoff: 0.5
+    - _GlobalExponent: 4.11
+    - _GlobalMult: 1.25
+    - _GlobalTimeMultiplier: 0.01
+    - _GradientWidth: 0.2
+    - _LowMultiplier: 0.15
+    - _MaxClouds: 32.28
+    - _MaxTransparency: 3.23
+    - _MaxWifi: 0.252
+    - _MinClouds: 0.32
+    - _MinTransparency: 0.29
+    - _Slider: 0.499
+    - __dirty: 0
+    m_Colors:
+    - _Color: {r: 0.02441454, g: 1, b: 0, a: 0}
+    - _TilingSpeeds1: {r: 0.1, g: 0.1, b: 2, a: 2}
+    - _TilingSpeeds2: {r: 0.25, g: 0.25, b: 1, a: -2}
+    - _TilingSpeeds3: {r: 0.5, g: 0.5, b: 5, a: 2.5}
+    - _Vector0: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector1: {r: 0, g: 0, b: 0, a: 0}

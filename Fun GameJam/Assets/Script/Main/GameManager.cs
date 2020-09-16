@@ -4,15 +4,57 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool mHasMenu = false;
+
+    private static GameManager sInstance;
+    private void Awake()
     {
-        
+        sInstance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        if (!mHasMenu)
+        {
+            StartCoroutine(TemporaryStart()); 
+        }
+    }
+
+    public delegate void Notify();
+    /// <summary>
+    /// Event to prepare the maps and other ressources
+    /// </summary>
+    public static Notify OnGamePreparation;
+    /// <summary>
+    /// Event to start the game when the map and ressources are ready
+    /// </summary>
+    public static Notify OnGameReady;
+    /// <summary>
+    /// When the player loses
+    /// </summary>
+    public static Notify OnGameOver;
+    /// <summary>
+    /// When the player wins
+    /// </summary>
+    public static Notify OnGameWin;
+    /// <summary>
+    /// When the player restarts the game
+    /// </summary>
+    public static Notify OnRestart;
+    /// <summary>
+    /// When the player loses the signal for too long and is finally disconnected
+    /// </summary>
+    public static Notify OnDisconection;
+    /// <summary>
+    /// When the player is disconnected but  reconnects again.
+    /// </summary>
+    public static Notify OnReconnection;
+
+
+    private IEnumerator TemporaryStart()
+    {
+        if (OnGamePreparation != null) OnGamePreparation();
+        yield return null;
+        if (OnGameReady != null) OnGameReady();
     }
 }

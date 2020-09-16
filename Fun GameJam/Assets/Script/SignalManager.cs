@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class SignalManager : MonoBehaviour
 {
+    [Header("Antenna")]
     public Transform mAntennaTransform;
     [Range(0f,20f)]public float mRotationAntennaSpeed = 10f;
 
-    private Quaternion mPreviousRotation;
+    [Header("Scanner")]
+    public Transform mScannerPivot;
+    public float mRefreshTimer = 0.5f;
+    public float mScannerDuraction = 0.25f;
+    public Material mScannerMaterial;
+    
+
+    private Quaternion mPreviousAntennaRotation;
+    private Quaternion mScannerRotation;
+    private bool mIsScanning = false;
     private void LateUpdate()
     {
-            mAntennaTransform.rotation = mPreviousRotation;
+            mAntennaTransform.rotation = mPreviousAntennaRotation;
         Vector2 direction = new Vector2(Input.GetAxis("AntennaX"), Input.GetAxis("AntennaY"));
 
         //Antenna rotation
@@ -18,9 +28,18 @@ public class SignalManager : MonoBehaviour
         {
             direction = direction.LimitMagnitude(1f);
             Vector3 worldDirection = (direction.x * CameraManager.RightDirection + direction.y * CameraManager.ForwardDirection).normalized;
-            mAntennaTransform.rotation = Quaternion.Lerp(mPreviousRotation,
+            mAntennaTransform.rotation = Quaternion.Lerp(mPreviousAntennaRotation,
                     Quaternion.LookRotation(worldDirection), mRotationAntennaSpeed * Time.deltaTime);
-            mPreviousRotation = mAntennaTransform.rotation; 
+            mPreviousAntennaRotation = mAntennaTransform.rotation; 
         }
+    }
+
+    private IEnumerator ScanCoroutine()
+    {
+        float currentTime = 0;
+        mIsScanning = true;
+        mScannerRotation = mAntennaTransform.rotation;
+
+        //while()
     }
 }
