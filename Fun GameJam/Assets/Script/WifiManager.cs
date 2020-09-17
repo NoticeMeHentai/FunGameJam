@@ -47,7 +47,7 @@ public class WifiManager : MonoBehaviour
     public static WifiPoint sClosestWifiPoint { get; private set; }
     private void PlaceWifiPoints()
     {
-        Debug.Log("Starting placing wifi points");
+        //Debug.Log("Starting placing wifi points");
         int childCount = transform.childCount;
         for (int i = 1; i < childCount; i++) DestroyImmediate(transform.GetChild(1).gameObject);
 
@@ -60,7 +60,7 @@ public class WifiManager : MonoBehaviour
         for (int i = 0; i < totalAmount; i++) ids[i] = fraction * i;
         System.Random rnd = new System.Random();
         rnd.Shuffle<float>(ids);
-        Debug.Log("IDs after randomization:" + ids.ToString());
+        //Debug.Log("IDs after randomization:" + ids.ToString());
 
         List<WifiPoint> wifiPoints = new List<WifiPoint>(totalAmount);
 
@@ -78,7 +78,7 @@ public class WifiManager : MonoBehaviour
                 newPoint.mIDMask = ids[i * mSquareAmount + j];
                 newPoint.mIDCounter = i * mSquareAmount + j;
                 wifiPoints.Add(newPoint);
-                Debug.LogFormat("Placed a new point at {0} with ID {1}, actual number {2}", actualPosition, newPoint.mIDMask, i * mSquareAmount + j);
+                //Debug.LogFormat("Placed a new point at {0} with ID {1}, actual number {2}", actualPosition, newPoint.mIDMask, i * mSquareAmount + j);
             }
         #endregion
 
@@ -88,7 +88,7 @@ public class WifiManager : MonoBehaviour
 
             if (wifiPoints[i].mIDMask < mRandomMask)
             {
-                Debug.LogFormat("Destroying the point number {0} with an ID of {1}", i, wifiPoints[i].mIDMask);
+                //Debug.LogFormat("Destroying the point number {0} with an ID of {1}", i, wifiPoints[i].mIDMask);
                 DestroyImmediate(wifiPoints[i].gameObject);
                 wifiPoints.RemoveAt(i);
                 i--;
@@ -106,7 +106,7 @@ public class WifiManager : MonoBehaviour
             {
                 WifiPoint wifiRef = hit.collider.GetComponent<WifiPoint>();
                 int ID = wifiRef.mIDCounter;
-                Debug.LogFormat("Point {0} was too close so it's been removed", ID);
+                //Debug.LogFormat("Point {0} was too close so it's been removed", ID);
                 DestroyImmediate(hit.collider.gameObject);
                 wifiPoints.Remove(wifiRef);
             }
@@ -124,7 +124,7 @@ public class WifiManager : MonoBehaviour
                 DestroyImmediate(wifiPoints[i].gameObject);
                 wifiPoints.RemoveAt(i);
                 i--;
-                Debug.LogFormat("Removed point {0} because it was out of range", ID);
+                //Debug.LogFormat("Removed point {0} because it was out of range", ID);
             }
         }
         #endregion

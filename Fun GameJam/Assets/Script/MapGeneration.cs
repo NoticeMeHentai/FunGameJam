@@ -12,11 +12,16 @@ public class ObjectToSpawn
     public float mGrounDepht = 0.5f;
     public bool mIsFence = false;
 }
+[System.Serializable]
+public class MapMasks
+{
+    public Texture2D mHeightMap;
+    public Texture2D mColorMap;
+}
 public class MapGeneration : MonoBehaviour
 {
     [InstanceButton(typeof(MapGeneration), nameof(RegenerateTerrain))]
-    public Texture2D mHeightmap;
-    public Texture2D mMaskmap;
+    [SerializeField] public MapMasks[] mMaskMaps;
 
     public GameObject[] mFence;
     public GameObject mElectricPillarAndWire;
@@ -37,6 +42,9 @@ public class MapGeneration : MonoBehaviour
 
     [SerializeField]
     public ObjectToSpawn[] mObjectClass;
+
+    private Texture2D mHeightMapSelected;
+    private Texture2D mColorMapSelected;
 
     private Vector3 mHalfExtents = new Vector3(1f, 0, 1f);
     private int mNbrDestroyed = 0;
@@ -65,10 +73,28 @@ public class MapGeneration : MonoBehaviour
     public float mFenceEspacement = 0.2f;
     public float mNextFenceRandomYDegreeMax = 60;
     public int mMaxFenceTogether = 4;
+    [Header("Random offset maskmap")]
+    public Vector2 mMinMaxRandomAngle = new Vector2(40f, 120f);
+    public Vector2 mMinMaxRandomPivot = new Vector2(0.4f, 0.6f);
+    public float mBorderHeightmapDown = 0.05f;
+
+    public static Vector2 sPivot { get; private set; }
+    public static float sAngle { get; private set; }
+    public static Texture2D sTexture { get; private set; }
+
+    private void Awake()
+    {
+        GameManager.OnGamePreparation += delegate { RegenerateTerrain(); };
+        GameManager.OnRestart += delegate { RegenerateTerrain(); };
+    }
 
 
     private void RegenerateTerrain()
     {
+        int mapIndex = Random.Range(0, mMaskMaps.Length);
+        mColorMapSelected = mMaskMaps[mapIndex].mColorMap;
+        mHeightMapSelected = mMaskMaps[mapIndex].mHeightMap;
+
         if (mTerrain != null)
             DestroyImmediate(mTerrain);
 
@@ -80,10 +106,10 @@ public class MapGeneration : MonoBehaviour
 
         int numVertices = (xCount + 1) * (zCount + 1);
         int numTriangles = xCount * zCount * 2;
-        if(transform.childCount >= 0)
+        if (transform.childCount >= 0)
         {
             mNbrDestroyed = 0;
-            for (int i = transform.childCount -1 ; i > -1; i--)
+            for (int i = transform.childCount - 1; i > -1; i--)
             {
                 DestroyImmediate(transform.GetChild(i).gameObject);
                 mNbrDestroyed++;
@@ -96,6 +122,14 @@ public class MapGeneration : MonoBehaviour
 
         bool heightMapUnreadable = false;
         bool maskMapUnreadable = false;
+        sTexture = mColorMapSelected;
+
+        sAngle = Random.Range(-mMinMaxRandomAngle.x, mMinMaxRandomAngle.y) * Mathf.Deg2Rad;
+        float sin2 = Mathf.Sin(sAngle);
+        float con2 = Mathf.Cos(sAngle);
+
+        sPivot = new Vector2(Random.Range(mMinMaxRandomPivot.x, mMinMaxRandomPivot.y), Random.Range(mMinMaxRandomPivot.x, mMinMaxRandomPivot.y));
+
 
         int index = 0;
         for (float z = 0.0f; z < zCount + 1; z++)
@@ -105,15 +139,28 @@ public class MapGeneration : MonoBehaviour
                 float fxPos = (x / xCount);
                 float fzPos = (z / zCount);
                 float height = 0.0f;
+                float heightBorderInfluence = 1f;
                 Color color = Color.white;
                 Vector3 position = new Vector3();
 
-                if (mHeightmap != null)
+                Vector2 uvPos = new Vector2(fxPos, fzPos);
+                uvPos = uvPos.Rotate(sAngle, sPivot);
+
+                if (mHeightMapSelected != null)
                 {
                     try
                     {
-                        float target = mHeightmap.GetPixelBilinear(1.0f - fxPos, 1.0f - fzPos).g;
-                        height = mHeight * target;
+                        if (fxPos < mBorderHeightmapDown)
+                            heightBorderInfluence = Mathf.InverseLerp(0, mBorderHeightmapDown, fxPos);
+                        else if (fxPos > (1f - mBorderHeightmapDown))
+                            heightBorderInfluence = 1f - Mathf.InverseLerp(1 - mBorderHeightmapDown, 1f, fxPos);
+                        else if (fzPos < mBorderHeightmapDown)
+                            heightBorderInfluence = Mathf.InverseLerp(0, mBorderHeightmapDown, fzPos);
+                        else if (fzPos > (1f - mBorderHeightmapDown))
+                            heightBorderInfluence = 1f - Mathf.InverseLerp(1 - mBorderHeightmapDown, 1f, fzPos);
+
+                        float target = mHeightMapSelected.GetPixelBilinear(1.0f - uvPos.x, 1.0f - uvPos.y).g;
+                        height = mHeight * target* heightBorderInfluence;
                     }
                     catch (System.Exception)
                     {
@@ -121,11 +168,11 @@ public class MapGeneration : MonoBehaviour
                     }
                 }
 
-                if (mMaskmap != null)
+                if (mColorMapSelected != null)
                 {
                     try
                     {
-                        color = mMaskmap.GetPixelBilinear(1.0f - fxPos, 1.0f - fzPos);
+                        color = mColorMapSelected.GetPixelBilinear(1.0f - uvPos.x, 1.0f - uvPos.y);
                     }
                     catch (System.Exception)
                     {
@@ -209,18 +256,20 @@ public class MapGeneration : MonoBehaviour
 
                 while (!mSpawned && nbrOfTry < mMaxTryIteration)
                 {
-                    Vector3 currentPosition = transform.position + new Vector3(Random.Range(0, mMapSizeX* mGameZoneRatio), 0.0f, Random.Range(0, mMapSizeY* mGameZoneRatio)) + new Vector3(-(mMapSizeX* mGameZoneRatio) / 2, 15, -(mMapSizeY* mGameZoneRatio) / 2);
+                    Vector3 currentPosition = transform.position + new Vector3(Random.Range(0, mMapSizeX * mGameZoneRatio), 0.0f, Random.Range(0, mMapSizeY * mGameZoneRatio)) + new Vector3(-(mMapSizeX * mGameZoneRatio) / 2, 15, -(mMapSizeY * mGameZoneRatio) / 2);
                     float randomRotationX = Random.Range(0, mObjectClass[j].mRandomXZDegreeMax);
                     float randomRotationY = Random.Range(0, 360);
                     float randomRotationZ = Random.Range(0, mObjectClass[j].mRandomXZDegreeMax);
                     RaycastHit hit;
                     if (!Physics.SphereCast(currentPosition + Vector3.up * 50, mObjectClass[j].mMinDistbetweentwo, -Vector3.up, out hit, 100.0f, mSpawnObjectLayerMask)
-                        && Physics.Raycast(currentPosition, -Vector3.up, out mHit, 50.0f))
+                        && Physics.Raycast(currentPosition, -Vector3.up, out mHit, 50.0f, mGroundMask))
                     {
                         Vector2 pixelUV = mHit.textureCoord;
-                        pixelUV.x *= -mMaskmap.width;
-                        pixelUV.y *= -mMaskmap.height;
-                        Color color = mMaskmap.GetPixel(Mathf.FloorToInt(pixelUV.x), Mathf.FloorToInt(pixelUV.y));
+                        pixelUV = pixelUV.Rotate(sAngle, sPivot);
+                        //pixelUV.x *= -mColorMapSelected.width;
+                        //pixelUV.y *= -mColorMapSelected.height;
+                        //Color color = mColorMapSelected.GetPixel(Mathf.FloorToInt(pixelUV.x), Mathf.FloorToInt(pixelUV.y));
+                        Color color = sTexture.GetPixelBilinear(1 - pixelUV.x, 1 - pixelUV.y);
 
                         if (color.r >= 0.4f)
                         {
@@ -232,7 +281,7 @@ public class MapGeneration : MonoBehaviour
                             {
                                 mLastFenceSpawned = objectsSpawned;
                                 mLastFenceSpawned.transform.rotation = Quaternion.LookRotation(mHit.normal) * Quaternion.Euler(90, 0, 0);
-                                for (int k = 0; k < mMaxFenceTogether-1; k++)
+                                for (int k = 0; k < mMaxFenceTogether - 1; k++)
                                 {
 
                                     int nextFenceNbrOfTry = 0;
@@ -245,9 +294,9 @@ public class MapGeneration : MonoBehaviour
                                             && Physics.Raycast(mLastFenceSpawned.transform.position + mLastFenceSpawned.transform.forward * mFenceFrontSize + mLastFenceSpawned.transform.forward * mFenceEspacement + Vector3.up * 50, -Vector3.up, out mHit, 100.0f))
                                         {
                                             Vector2 nextFencepixelUV = mHit.textureCoord;
-                                            nextFencepixelUV.x *= -mMaskmap.width;
-                                            nextFencepixelUV.y *= -mMaskmap.height;
-                                            Color nextFencecolor = mMaskmap.GetPixel(Mathf.FloorToInt(nextFencepixelUV.x), Mathf.FloorToInt(nextFencepixelUV.y));
+                                            nextFencepixelUV.x *= -mColorMapSelected.width;
+                                            nextFencepixelUV.y *= -mColorMapSelected.height;
+                                            Color nextFencecolor = mColorMapSelected.GetPixel(Mathf.FloorToInt(nextFencepixelUV.x), Mathf.FloorToInt(nextFencepixelUV.y));
                                             if (nextFencecolor.r >= 0.4f)
                                             {
                                                 randomProps = Random.Range(0, mObjectClass[j].mObject.Length);
@@ -292,7 +341,7 @@ public class MapGeneration : MonoBehaviour
                 mSpawned = false;
             }
         }
-        Debug.Log("Destroyed : "+ mNbrDestroyed +"| failed : " + mNbrFailed + "| spawned : " + mNbrSpawned);
+        Debug.Log("Destroyed : " + mNbrDestroyed + "| failed : " + mNbrFailed + "| spawned : " + mNbrSpawned);
         mNbrFailed = 0;
         mNbrSpawned = 0;
         GenerateElectricLines();
@@ -301,7 +350,7 @@ public class MapGeneration : MonoBehaviour
     public void GenerateFenceBounds()
     {
         float mFenceHeight = mHeight - 0.2f;
-        for (int j = 0; j < 4;j++)
+        for (int j = 0; j < 4; j++)
         {
             for (int i = 0; i < mFenceNbrOnSide; i++)
             {
@@ -312,7 +361,7 @@ public class MapGeneration : MonoBehaviour
 
                 if (j == 0)
                 {
-                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(randomOffset, 0.0f, 0.0f) + new Vector3(-mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3(0.0f, 0.0f, (mMapSizeY/mFenceNbrOnSide) * i), Quaternion.Euler(0.0f, randomRotationY, randomRotationSide));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(randomOffset, 0.0f, 0.0f) + new Vector3(-mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3(0.0f, 0.0f, (mMapSizeY / mFenceNbrOnSide) * i), Quaternion.Euler(0.0f, randomRotationY, randomRotationSide));
                     objectsSpawned.transform.parent = transform;
 
                 }
@@ -323,12 +372,12 @@ public class MapGeneration : MonoBehaviour
                 }
                 else if (j == 2)
                 {
-                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f)*Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mFenceHeight, -mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f) * Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
                     objectsSpawned.transform.parent = transform;
                 }
                 else
                 {
-                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mFenceHeight, mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f)*Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
+                    GameObject objectsSpawned = Instantiate(mFence[randomProps], transform.position + new Vector3(0.0f, 0.0f, randomOffset) + new Vector3(-mMapSizeX / 2, mFenceHeight, mMapSizeY / 2) + new Vector3((mMapSizeX / mFenceNbrOnSide) * i, 0.0f, 0.0f), Quaternion.Euler(randomRotationSide, 0.0f, 0.0f) * Quaternion.Euler(0.0f, 90 + randomRotationY, 0.0f));
                     objectsSpawned.transform.parent = transform;
                 }
             }
@@ -344,11 +393,11 @@ public class MapGeneration : MonoBehaviour
         electricLine.transform.parent = transform;
         for (int i = 0; i < mElectricPillarNbr; i++)
         {
-            GameObject pillarSpawned = Instantiate(mElectricPillarAndWire, currentPosition + (-electricLine.transform.forward * mMapSizeX)+ (electricLine.transform.forward * mElectricPillarFrontSize* i) , electricLine.transform.rotation);
+            GameObject pillarSpawned = Instantiate(mElectricPillarAndWire, currentPosition + (-electricLine.transform.forward * mMapSizeX) + (electricLine.transform.forward * mElectricPillarFrontSize * i), electricLine.transform.rotation);
             pillarSpawned.transform.parent = transform;
             if (i == mElectricPillarNbr - 1)
             {
-                GameObject finalPillarSpawned = Instantiate(mElectricPillar, currentPosition + (-electricLine.transform.forward * mMapSizeX) + (electricLine.transform.forward * mElectricPillarFrontSize * (i+1)), electricLine.transform.rotation);
+                GameObject finalPillarSpawned = Instantiate(mElectricPillar, currentPosition + (-electricLine.transform.forward * mMapSizeX) + (electricLine.transform.forward * mElectricPillarFrontSize * (i + 1)), electricLine.transform.rotation);
                 finalPillarSpawned.transform.parent = transform;
             }
 

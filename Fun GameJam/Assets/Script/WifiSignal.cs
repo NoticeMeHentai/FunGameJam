@@ -15,6 +15,7 @@ public class WifiSignal : MonoBehaviour
     public AnimationCurve mSpeedTransitionChanceCurve = new AnimationCurve();
     [Header("Stuff")]
     public float mTriggerDistance = 1f;
+    public MeshRenderer mIndicatorRend;
 
 
     private WifiPoint mOriginPoint;
@@ -33,19 +34,17 @@ public class WifiSignal : MonoBehaviour
     private void Awake()
     {
         sInstance = this;
-        GameManager.OnGameReady += Initialize;
-        SignalManager.OnDisconnection += delegate { mFreeze = true; mCurrentSpeed = 0; CancelInvoke(nameof(SwitchSpeed)); };
-        SignalManager.OnReconnection += delegate { mFreeze = false; SwitchSpeed(); };
-    }
+        GameManager.OnGameReady += delegate {
+            mFreeze = false;
+            transform.position = WifiManager.sClosestWifiPoint.transform.position;
+            mOriginPoint = WifiManager.sClosestWifiPoint;
+            mWifiPointTarget = mOriginPoint.GetRandomNextWifiPoint(mOriginPoint);
+            mCurrentDirection = (mWifiPointTarget.transform.position - mOriginPoint.transform.position).normalized;
+            SwitchSpeed();
+        };
+        SignalScanner.OnBigDisconnection += delegate { mFreeze = true; mCurrentSpeed = 0; CancelInvoke(nameof(SwitchSpeed)); mIndicatorRend.enabled = true; };
+        SignalScanner.OnBigReconnection += delegate { mFreeze = false; SwitchSpeed(); mIndicatorRend.enabled = false; };
 
-    private void Initialize()
-    {
-        mFreeze = false;
-        transform.position = WifiManager.sClosestWifiPoint.transform.position;
-        mOriginPoint = WifiManager.sClosestWifiPoint;
-        mWifiPointTarget = mOriginPoint.GetRandomNextWifiPoint(mOriginPoint);
-        mCurrentDirection = (mWifiPointTarget.transform.position - mOriginPoint.transform.position).normalized;
-        SwitchSpeed();
     }
 
     private void Update()
@@ -62,6 +61,12 @@ public class WifiSignal : MonoBehaviour
             }
         }
     }
+
+    private void Initialize()
+    {
+        
+    }
+
     private void SwitchSpeed() { StartCoroutine(SwitchSpeedCoroutine()); }
 
     private IEnumerator SwitchSpeedCoroutine()
@@ -70,7 +75,7 @@ public class WifiSignal : MonoBehaviour
         float nextInterval = mMinMaxSpeedChangeInterval.Lerp(mSpeedIntervalChanceCurve.Evaluate(Random.value));
         float transitionTime = mMinMaxTransitionSpeedTime.Lerp(mSpeedTransitionChanceCurve.Evaluate(Random.value));
         float currentSpeed = mCurrentSpeed;
-        Debug.LogFormat("[WifiSignal] New sitch speed: target speed {0}, target interval {1}, target transition {2}", newSpeed, nextInterval, transitionTime);
+        //Debug.LogFormat("[WifiSignal] New sitch speed: target speed {0}, target interval {1}, target transition {2}", newSpeed, nextInterval, transitionTime);
         float currentTime = 0;
 
         while (currentTime < transitionTime)
