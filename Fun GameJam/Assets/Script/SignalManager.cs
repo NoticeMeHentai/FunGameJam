@@ -34,12 +34,12 @@ public class SignalManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ScanCoroutine()
-    {
-        float currentTime = 0;
-        mIsScanning = true;
-        mScannerRotation = mAntennaTransform.rotation;
-
-        //while()
-    }
+    //private IEnumerator ScanCoroutine()
+    //{
+    //    float currentTime = 0;
+    //    mIsScanning = true;
+    //    mScannerRotation = mAntennaTransform.rotation;
+    //
+    //    //while()
+    //}
 }
