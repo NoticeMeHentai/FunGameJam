@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     private float mCurrentTimeLeft;
     private int mCurrentLivesLeft = 0;
 
-
+    public static float sTimeLeft => sInstance.mCurrentTimeLeft;
     public static float sCurrentPoints => sInstance.mCurrentPoints;
     public static float sCurrentDownloadProgress => sInstance.mCurrentDownloadProgress;
     public static File sCurrentFileBeingDownloaded => sInstance.mCurrentFileBeingDownloaded;
@@ -98,9 +98,9 @@ public class GameManager : MonoBehaviour
             if (mCurrentDownloadProgress >= mCurrentFileBeingDownloaded.mFileSize)
                 
             {
-                if(OnFileDonwloaded!=null) OnFileDonwloaded();
                 int newRandomIndex = Random.Range(0, mFileTypes.Length);
                 mCurrentFileBeingDownloaded = mFileTypes[newRandomIndex];
+                if(OnFileDonwloaded!=null) OnFileDonwloaded();
             }
         }
         if (mCountsAsInPlay)
