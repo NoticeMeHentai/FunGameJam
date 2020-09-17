@@ -229,3 +229,35 @@ InputManager:
     type: 0
     axis: 4
     joyNum: 0
+  - serializedVersion: 3
+    m_Name: HorizontalMenu
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.2
+    dead: 0.19
+    sensitivity: 0.2
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 5
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: VerticalMenu
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0.2
+    dead: 0.19
+    sensitivity: 0.2
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 6
+    joyNum: 0
