@@ -421,6 +421,24 @@ public static class Vector2Extensions
         return Mathf.Abs(v.y - v.x);
     }
 
+    //https://stackoverflow.com/questions/45270723/how-to-rotate-vector
+    public static Vector2 Rotate(this Vector2 v, float degrees)
+    {
+        return new Vector2(
+            (float)(v.x * Mathf.Cos(degrees) - v.y * Mathf.Sin(degrees)),
+            (float)(v.x * Mathf.Sin(degrees) + v.y * Mathf.Cos(degrees))
+        );
+    }
+
+    public static Vector2 Rotate(this Vector2 v, float degrees, Vector2 pivot)
+    {
+        v -= pivot;
+        return new Vector2(
+            (float)(v.x * Mathf.Cos(degrees) - v.y * Mathf.Sin(degrees)),
+            (float)(v.x * Mathf.Sin(degrees) + v.y * Mathf.Cos(degrees))
+        ) + pivot;
+    }
+
 }
 
 public static class RandomExtensions

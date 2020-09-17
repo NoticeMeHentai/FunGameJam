@@ -41,10 +41,10 @@ Material:
     - _LowMultiplier: 0.15
     - _MaxClouds: 32.28
     - _MaxTransparency: 5.34
-    - _MaxWifi: 0
+    - _MaxWifi: 0.7129992
     - _MinClouds: 0.32
     - _MinTransparency: 0.29
-    - _Slider: 0.3333432
+    - _Slider: 0.74198836
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 0, b: 0, a: 1}
