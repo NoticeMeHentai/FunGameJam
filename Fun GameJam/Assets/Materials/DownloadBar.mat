@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: DownloadBar
   m_Shader: {fileID: 4800000, guid: 5e07e847d5cae804eab0c151f4b24719, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: UNITY_UI_ALPHACLIP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -68,7 +68,7 @@ Material:
     - _ColorMask: 15
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DownloadRatio: 0
+    - _DownloadRatio: 1
     - _DstBlend: 0
     - _Float0: 0
     - _GlossMapScale: 1
@@ -87,7 +87,7 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
     - _UVSec: 0
-    - _UseUIAlphaClip: 0
+    - _UseUIAlphaClip: 1
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
