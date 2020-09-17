@@ -57,7 +57,7 @@ public class CameraManager : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 newPos = PlayerMovement.GetPosition() - transform.forward * mDistance;
+        Vector3 newPos = PlayerMovement.Position - transform.forward * mDistance;
         transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * mLerpSpeed);
     }
 

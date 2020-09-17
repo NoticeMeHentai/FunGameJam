@@ -24,12 +24,18 @@ public class WifiSignal : MonoBehaviour
     private float mCurrentInterval = 0f;
     private Vector3 mCurrentDirection = Vector3.one;
 
+
     private float _CurrentDistance => Vector3.Distance(transform.position, mWifiPointTarget.transform.position);
+
+    private static WifiSignal sInstance;
+
+    public static Vector3 sCurrentPosition => sInstance.transform.position;
     private void Awake()
     {
+        sInstance = this;
         GameManager.OnGameReady += Initialize;
-        GameManager.OnDisconection += delegate { mFreeze = true; mCurrentSpeed = 0; CancelInvoke(nameof(SwitchSpeed)); };
-        GameManager.OnReconnection += delegate { mFreeze = false; SwitchSpeed(); };
+        SignalManager.OnDisconnection += delegate { mFreeze = true; mCurrentSpeed = 0; CancelInvoke(nameof(SwitchSpeed)); };
+        SignalManager.OnReconnection += delegate { mFreeze = false; SwitchSpeed(); };
     }
 
     private void Initialize()

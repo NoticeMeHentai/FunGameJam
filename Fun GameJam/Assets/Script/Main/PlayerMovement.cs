@@ -6,10 +6,14 @@ public class PlayerMovement : MonoBehaviour
 {
 
     #region Exposed variables
+    [Header("Movement")]
     [Min(0f)]public float mMaxWalkSpeed = 10f;
     [Min(0f)] public float mRunSpeedRatio = 2.5f;
     [Range(0.2f,1f)]public float mAccelerationTime = 0.5f;
     [Range(10f,30f)]public float mRotationSpeed = 30f;
+    [Header("Obstacles")]
+    public float mFlatTime = 1f;
+    public float mBiteStunTime = 1.5f;
     #endregion
 
     #region Private/Local variables
@@ -20,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     /// The direction the player is currently looking at
     private Vector3 mDirection;
     private CharacterController mCharacterController;
-    private Rigidbody mRigidbody;
     private float mMaxRunSpeed = 0;
 
 
@@ -31,17 +34,21 @@ public class PlayerMovement : MonoBehaviour
 
     #region Properties
     private static PlayerMovement sInstance;
-    //public static Vector3 Position = sInstance.transform.position;
-    public static Vector3 GetPosition()
-    {
-        return sInstance.transform.position;
-    }
+    public static Vector3 Position => sInstance.transform.position;
 
+
+    private Rigidbody mRigidbody;
     private Rigidbody _Rigidbody { get { if (mRigidbody == null) mRigidbody = GetComponentInChildren<Rigidbody>(); return mRigidbody; } }
+
+
+    private Animator mAnimator;
+    private Animator _Animator { get { if (mAnimator == null) mAnimator = GetComponentInChildren<Animator>(); return mAnimator; } }
+
+
     public static float SlowRatio { get; set; } = 0;
 
-    public delegate void Notify();
-    public static Notify OnFreeze;
+    public static GameManager.Notify OnFreeze;
+    public static GameManager.Notify OnUnfreeze;
 
     #endregion
 
@@ -77,6 +84,9 @@ public class PlayerMovement : MonoBehaviour
         rb.isKinematic = true;
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
+
+        OnFreeze += delegate { mIsFrozen = true; };
+        OnUnfreeze += delegate { mIsFrozen = false; };
     }
 
     private void Start()
@@ -125,7 +135,9 @@ public class PlayerMovement : MonoBehaviour
             //lerpSpeed = Mathf.Clamp01(lerpSpeed - Time.deltaTime / _AccelerationTime);
             if (lerpSpeed <= 0.1f) lerpSpeed = 0f;
         }
-        float mCurrentSpeed = mMaxWalkSpeed *lerpSpeed * (1 - SlowRatio) * Input.GetAxis("Run")>0.2f?mMaxRunSpeed:mMaxWalkSpeed;
+        float mCurrentSpeed = lerpSpeed * (1 - SlowRatio) * (((Input.GetAxis("Run")>0.2f) && SlowRatio==0)?mMaxRunSpeed:mMaxWalkSpeed);
+        float speedAnimatorParameter = lerpSpeed * Input.GetAxis("Run") > 0.2 ? 1 : 0.5f;
+        _Animator.SetFloat("_Speed", speedAnimatorParameter);
 
         //Delta movement calculus
         mDirection = CameraManager.RightDirection * movementInput.x + CameraManager.ForwardDirection * movementInput.y;
@@ -162,14 +174,29 @@ public class PlayerMovement : MonoBehaviour
 
 
     #endregion
-
+    private void Slow(float amount)
+    {
+        SlowRatio = amount;
+        _Animator.SetBool("Slow", amount > 0);
+    }
     private void Unfreeze()
     {
-        mIsFrozen = false;
+        _Animator.SetTrigger("GetUp");
     }
-    public static void Freeze(bool value)
+    private void Freeze(bool value)
     {
-        sInstance.mIsFrozen = true;
-        if(OnFreeze!=null)OnFreeze();
+        _Animator.SetTrigger("Hit");
+        if (OnFreeze!=null)OnFreeze();
+    }
+    private void Fall()
+    {
+        StartCoroutine(nameof(FallCoroutine));
+    }
+    private IEnumerator FallCoroutine()
+    {
+        if (OnFreeze != null) OnFreeze();
+        _Animator.SetTrigger("Fall");
+        yield return new WaitForSeconds(mFlatTime);
+        _Animator.SetTrigger("GetUp");
     }
 }

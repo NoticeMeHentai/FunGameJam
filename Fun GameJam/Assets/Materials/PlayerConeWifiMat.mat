@@ -40,14 +40,14 @@ Material:
     - _GradientWidth: 0.2
     - _LowMultiplier: 0.15
     - _MaxClouds: 32.28
-    - _MaxTransparency: 3.23
-    - _MaxWifi: 0.252
+    - _MaxTransparency: 5.34
+    - _MaxWifi: 0
     - _MinClouds: 0.32
     - _MinTransparency: 0.29
-    - _Slider: 0.499
+    - _Slider: 0.3333432
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 0.02441454, g: 1, b: 0, a: 0}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _TilingSpeeds1: {r: 0.1, g: 0.1, b: 2, a: 2}
     - _TilingSpeeds2: {r: 0.25, g: 0.25, b: 1, a: -2}
     - _TilingSpeeds3: {r: 0.5, g: 0.5, b: 5, a: 2.5}

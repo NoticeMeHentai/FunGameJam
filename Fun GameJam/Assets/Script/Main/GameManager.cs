@@ -41,14 +41,6 @@ public class GameManager : MonoBehaviour
     /// When the player restarts the game
     /// </summary>
     public static Notify OnRestart;
-    /// <summary>
-    /// When the player loses the signal for too long and is finally disconnected
-    /// </summary>
-    public static Notify OnDisconection;
-    /// <summary>
-    /// When the player is disconnected but  reconnects again.
-    /// </summary>
-    public static Notify OnReconnection;
 
 
     private IEnumerator TemporaryStart()
