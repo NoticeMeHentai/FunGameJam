@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
     public GameObject mPauseMenu;
     public GameObject mEndFailMenu;
     public GameObject mEndWinMenu;
+    public GameObject mDownloadBar;
+    public GameObject mWifiLostLogo;
+    private Text mDownloadText;
+    public bool mDownloading = true;
+    public float mDownloadSpeed = 3.0f;
+    public bool mWifiLost = false;
+
+    private bool mWifiLostLogoSetActive = false;
 
     public GameObject mMainMenuFirstSelected;
     public GameObject mOptionMenuFirstSelected;
@@ -20,14 +29,31 @@ public class MenuManager : MonoBehaviour
     public static bool sInMainMenu = true;
     public bool mEndFail = false;
     public bool mEndWin = false;
+    [Range(0.0f,1.0f)] public float mDownloadRatio = 0.0f;
 
     private void Start()
     {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(mMainMenuFirstSelected);
+        mDownloadText = mDownloadBar.transform.GetChild(0).GetComponent<Text>();
     }
     private void Update()
     {
+        if(mWifiLost && !mWifiLostLogoSetActive)
+        {
+            mWifiLostLogoSetActive = true;
+            mWifiLostLogo.SetActive(true);
+        }
+        if (!mWifiLost && mWifiLostLogoSetActive)
+        {
+            mWifiLostLogoSetActive = false;
+            mWifiLostLogo.SetActive(false);
+        }
+        mDownloadBar.GetComponent<Image>().material.SetFloat("_DownloadRatio", mDownloadRatio);
+        if(mDownloading)
+        {
+            mDownloadText.text = "Downloading" + new string('.', Mathf.FloorToInt((Time.time* mDownloadSpeed) % 3) + 1);
+        }
         if (Input.GetAxis("HorizontalMenu") > 0)
         {
             Debug.Log("a");
