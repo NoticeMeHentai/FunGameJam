@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 5e07e847d5cae804eab0c151f4b24719
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _DownloadBarMask: {fileID: 2800000, guid: ad2cd9af903331f4a9421a60ac971176, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
