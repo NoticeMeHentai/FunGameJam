@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Obstacles")]
     public float mFlatTime = 1f;
     public float mBiteStunTime = 1.5f;
+    [Range(0f, 1f)] public float mMudSlowness = 0.25f;
+    public AnimationCurve mMudSlownessCurve = new AnimationCurve();
+
     #endregion
 
     #region Private/Local variables
@@ -25,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 mDirection;
     private CharacterController mCharacterController;
     private float mMaxRunSpeed = 0;
-
+    private float mSlowRatio = 0;
+    
 
 
 
@@ -45,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
     private Animator _Animator { get { if (mAnimator == null) mAnimator = GetComponentInChildren<Animator>(); return mAnimator; } }
 
 
-    public static float SlowRatio { get; set; } = 0;
 
     public static GameManager.Notify OnFreeze;
     public static GameManager.Notify OnUnfreeze;
@@ -53,12 +56,13 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
 
+    #region MonoBehaviour
     private void Awake()
     {
-        SlowRatio = 1f;
+        mSlowRatio = 1f;
 
-        GameManager.OnGameReady += delegate { SlowRatio = 0f; transform.position = WifiManager.sClosestWifiPoint.transform.position; };
-        if(sInstance != null)
+        GameManager.OnGameReady += delegate { mSlowRatio = 0f; transform.position = WifiManager.sClosestWifiPoint.transform.position; };
+        if (sInstance != null)
         {
             Debug.Log("[Player] There was already an instance, wtf");
             Destroy(sInstance);
@@ -93,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
     {
     }
 
-    
+
 
     private void Update()
     {
@@ -108,10 +112,21 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Shader.SetGlobalVector("PlayerPosition", transform.position);
-        
+
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        
+        if (hit.collider.CompareTag("Rock") && !mIsFrozen && !mIsInMud && (Input.GetAxis("Run") > 0.2f)) Fall();
+    }
+
+    
+    #endregion
+
     #region Input Functions
+    float lerpSpeed = 0;
+    private bool mIsInMud = false;
     /// <summary>
     /// Moves the character depending on the axis values
     /// </summary>
@@ -120,9 +135,35 @@ public class PlayerMovement : MonoBehaviour
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
 
-        float lerpSpeed = mCurrentSpeedRatio;
+        lerpSpeed = mCurrentSpeedRatio;
 
         movementInput = movementInput.LimitMagnitude(1f);
+        bool isRunning = Input.GetAxis("Run") > 0.2f && !mIsInMud;
+
+        //Gravity simulation
+        Vector3 startingPoint = transform.position + Vector3.up * 0.4f;
+        if (Physics.Raycast(startingPoint, Vector3.down, out mDownHitInfo, 50f, MathHelper.GroundLayerMask) && Vector3.Distance(mDownHitInfo.point, startingPoint) > 0)
+        {
+            Debug.DrawLine(startingPoint, mDownHitInfo.point, Color.red);
+            mDirection += Vector3.up * Physics.gravity.y * Time.deltaTime; //Gravity is negative, hence the adding
+            mDirection += Vector3.up * 0.02f; //Small offset so that quads or effects placed aroung the player won't be hidden beneath the floor
+            Vector2 texUV = mDownHitInfo.textureCoord.Rotate(MapGeneration.sAngle, MapGeneration.sPivot);
+            Color col = MapGeneration.sTexture.GetPixelBilinear(1 - texUV.x, 1 - texUV.y);
+            if (col.g > 0.5f && !mIsInMud)
+            {
+                mIsInMud = true;
+                _Animator.SetBool("Slow", true);
+            }
+            else if (col.g < 0.3f && mIsInMud)
+            {
+                mIsInMud = false;
+                _Animator.SetBool("Slow", false);
+            }
+            mSlowRatio = col.g * mMudSlowness;
+            Debug.Log("Slow:" + col.g);
+
+        }
+
 
         //Smooth lineear gradient movement
         if (movementInput.sqrMagnitude > 0.2) //If acceleration
@@ -135,9 +176,10 @@ public class PlayerMovement : MonoBehaviour
             //lerpSpeed = Mathf.Clamp01(lerpSpeed - Time.deltaTime / _AccelerationTime);
             if (lerpSpeed <= 0.1f) lerpSpeed = 0f;
         }
-        float mCurrentSpeed = lerpSpeed * (1 - SlowRatio) * (((Input.GetAxis("Run")>0.2f) && SlowRatio==0)?mMaxRunSpeed:mMaxWalkSpeed);
-        float speedAnimatorParameter = lerpSpeed * Input.GetAxis("Run") > 0.2 ? 1 : 0.5f;
-        _Animator.SetFloat("_Speed", speedAnimatorParameter);
+        float mCurrentSpeed = lerpSpeed * (1 - mSlowRatio) * (((Input.GetAxis("Run")>0.2f) && mSlowRatio==0)?mMaxRunSpeed:mMaxWalkSpeed);
+        float speedAnimatorParameter = lerpSpeed * ((Input.GetAxis("Run") > 0.2 )? 1 : 0.5f);
+        //Debug.Log("Animator value" + speedAnimatorParameter+", "+lerpSpeed);
+        _Animator.SetFloat("Speed", speedAnimatorParameter);
 
         //Delta movement calculus
         mDirection = CameraManager.RightDirection * movementInput.x + CameraManager.ForwardDirection * movementInput.y;
@@ -145,22 +187,16 @@ public class PlayerMovement : MonoBehaviour
         mDirection.y = 0;
         //mDirection = Vector3.Normalize(mDirection);
 
+        
 
         //Rotation
         if (mDirection.magnitude > 0.01f)
             transform.rotation = Quaternion.Lerp(transform.rotation,
-                Quaternion.LookRotation(mDirection), mRotationSpeed * Time.deltaTime*(1 - SlowRatio));
+                Quaternion.LookRotation(mDirection), mRotationSpeed * Time.deltaTime*(1 - mSlowRatio));
         mDirection *= mCurrentSpeed * Time.deltaTime;
 
 
-        //Gravity simulation
-        Vector3 startingPoint = transform.position + Vector3.up * 0.4f;
-        if (Physics.Raycast(startingPoint, Vector3.down, out mDownHitInfo, 50f, MathHelper.GroundLayerMask) && Vector3.Distance(mDownHitInfo.point, startingPoint) > 0)
-        {
-            Debug.DrawLine(startingPoint, mDownHitInfo.point, Color.red);
-            mDirection += Vector3.up * Physics.gravity.y * Time.deltaTime; //Gravity is negative, hence the adding
-            mDirection += Vector3.up * 0.02f; //Small offset so that quads or effects placed aroung the player won't be hidden beneath the floor
-        }
+        
 
         //If there's a "Object reference" error leading here, then it means something went wrong when instantiating the characters
         if (mCurrentSpeed > 0)
@@ -168,6 +204,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 smoothDelta = (Vector3.Lerp(transform.position, transform.position + mDirection, 45f * Time.deltaTime)) - transform.position;
             mCharacterController.Move(smoothDelta);
         }
+        mCurrentSpeedRatio = lerpSpeed;
     }
 
 
@@ -176,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
     private void Slow(float amount)
     {
-        SlowRatio = amount;
+        mSlowRatio = amount;
         _Animator.SetBool("Slow", amount > 0);
     }
     private void Unfreeze()
@@ -190,6 +227,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Fall()
     {
+        Debug.Log("Falling!");
         StartCoroutine(nameof(FallCoroutine));
     }
     private IEnumerator FallCoroutine()
@@ -198,5 +236,6 @@ public class PlayerMovement : MonoBehaviour
         _Animator.SetTrigger("Fall");
         yield return new WaitForSeconds(mFlatTime);
         _Animator.SetTrigger("GetUp");
+        if (OnUnfreeze != null) OnUnfreeze();
     }
 }

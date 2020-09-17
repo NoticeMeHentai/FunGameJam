@@ -17,6 +17,10 @@ public class KikiCustomTerrain : MonoBehaviour
 
     private Mesh terrain;
 
+    public static Vector2 sRandomPivot = new Vector2();
+    public static float sRandomRotation = 0;
+    public static Texture2D sMaskMap;
+
 
     private void RegenerateTerrain()
     {
@@ -38,8 +42,18 @@ public class KikiCustomTerrain : MonoBehaviour
         Vector2[] uvs = new Vector2[numVertices];
         int[] triangles = new int[numTriangles * 3];
 
+        float randomOffset = Random.Range(-1f, 1f);
+        sRandomRotation = Random.Range(-10f, 10f)*Mathf.Deg2Rad;
+        float sin2 = Mathf.Sin(sRandomRotation);
+        float con2 = Mathf.Cos(sRandomRotation);
+        Vector2 middleMap = new Vector2(0.5f, 0.5f);
+        sRandomPivot = new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f));
+
         bool heightMapUnreadable = false;
         bool maskMapUnreadable = false;
+        sMaskMap = Maskmap;
+
+
 
         int index = 0;
         for (float z = 0.0f; z < zCount + 1; z++)
@@ -52,11 +66,18 @@ public class KikiCustomTerrain : MonoBehaviour
                 Color color = Color.white;
                 Vector3 position = new Vector3();
 
+
+
+                Vector2 uvPos = new Vector2(fxPos, fzPos);
+                uvPos = uvPos.Rotate(sRandomRotation, sRandomPivot);
+                //uvPos += new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                
+
                 if (Heightmap != null)
                 {
                     try
                     {
-                        float target = Heightmap.GetPixelBilinear(1.0f - fxPos, 1.0f - fzPos).g;
+                        float target = Heightmap.GetPixelBilinear(1.0f - uvPos.x, 1.0f - uvPos.y).g;
                         height = Height * target;
                     }
                     catch (System.Exception)
@@ -69,7 +90,7 @@ public class KikiCustomTerrain : MonoBehaviour
                 {
                     try
                     {
-                        color = Maskmap.GetPixelBilinear(1.0f - fxPos, 1.0f - fzPos);
+                        color = Maskmap.GetPixelBilinear(1.0f - uvPos.x, 1.0f - uvPos.y);
                     }
                     catch (System.Exception)
                     {
