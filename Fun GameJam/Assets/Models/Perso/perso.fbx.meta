@@ -8,6 +8,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
+    second: {fileID: 2100000, guid: 77451a46883516c438cc2167e151f87d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: perso_SHD
     second: {fileID: 2100000, guid: 0b76aacb96054b94fb333cb7b7d5b4e5, type: 2}
   materials:
     importMaterials: 1
