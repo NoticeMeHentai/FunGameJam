@@ -11,6 +11,7 @@ public class ObjectToSpawn
     public float mMinDistbetweentwo = 1;
     public float mGrounDepht = 0.5f;
     public bool mIsFence = false;
+    public float mRandomScaleMaxDiff = 0.5f;
 }
 [System.Serializable]
 public class MapMasks
@@ -264,6 +265,7 @@ public class MapGeneration : MonoBehaviour
                     float randomRotationX = Random.Range(0, mObjectClass[j].mRandomXZDegreeMax);
                     float randomRotationY = Random.Range(0, 360);
                     float randomRotationZ = Random.Range(0, mObjectClass[j].mRandomXZDegreeMax);
+                    float mRandomScale = Random.Range(-mObjectClass[j].mRandomScaleMaxDiff, mObjectClass[j].mRandomScaleMaxDiff);
                     RaycastHit hit;
                     if (!Physics.SphereCast(currentPosition + Vector3.up * 50, mObjectClass[j].mMinDistbetweentwo, -Vector3.up, out hit, 100.0f, mSpawnObjectLayerMask)
                         && Physics.Raycast(currentPosition, -Vector3.up, out mHit, 50.0f, mGroundMask))
@@ -279,6 +281,7 @@ public class MapGeneration : MonoBehaviour
                         {
                             GameObject objectsSpawned = Instantiate(mObjectClass[j].mObject[randomProps], mHit.point - Vector3.up * mObjectClass[j].mGrounDepht, Quaternion.Euler(randomRotationX, randomRotationY, randomRotationZ));
                             objectsSpawned.transform.parent = transform;
+                            objectsSpawned.transform.localScale *= (1 + mRandomScale);
 
 
                             if (mObjectClass[j].mIsFence)
