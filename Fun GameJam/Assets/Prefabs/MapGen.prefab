@@ -60,8 +60,8 @@ MonoBehaviour:
     type: 3}
   mMaskMaterial: {fileID: 2100000, guid: 959475dced075c4459e4bb2ada9c0869, type: 2}
   mHeight: 1
-  mMapSizeX: 50
-  mMapSizeY: 50
+  mMapSizeX: 40
+  mMapSizeY: 40
   mGameZoneRatio: 0.9
   mQuadDensityPerUnit: 4
   mObjectClass:
@@ -140,7 +140,7 @@ MonoBehaviour:
     mMinDistbetweentwo: 0.1
     mGrounDepht: 0.01
     mIsFence: 0
-    mRandomScaleMaxDiff: 0.5
+    mRandomScaleMaxDiff: 0.3
   mMaxTryIteration: 20
   mSpawnObjectLayerMask:
     serializedVersion: 2
