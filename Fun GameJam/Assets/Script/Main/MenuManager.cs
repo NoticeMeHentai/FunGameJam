@@ -31,6 +31,11 @@ public class MenuManager : MonoBehaviour
     public bool mEndWin = false;
     [Range(0.0f,1.0f)] public float mDownloadRatio = 0.0f;
 
+    private void Awake()
+    {
+        GameManager.OnGameOverNoLivesLeft += EndFail;
+        GameManager.OnGameOverTimeRanOut += EndWin;
+    }
     private void Start()
     {
         EventSystem.current.SetSelectedGameObject(null);

@@ -15,7 +15,7 @@ public class WifiSignal : MonoBehaviour
     public AnimationCurve mSpeedTransitionChanceCurve = new AnimationCurve();
     [Header("Stuff")]
     public float mTriggerDistance = 1f;
-    public MeshRenderer mIndicatorRend;
+
     public ParticleSystem mIndicatorVFX;
 
 
@@ -48,7 +48,7 @@ public class WifiSignal : MonoBehaviour
             mFreeze = true;
             mCurrentSpeed = 0;
             CancelInvoke(nameof(SwitchSpeed));
-            mIndicatorRend.enabled = true;
+
             Shader.SetGlobalVector("SignalInfo", new Vector4(transform.position.x, transform.position.z, SignalScanner.sDistanceToBigReconnect, 1));
             if (mIndicatorVFX != null)
             {
@@ -60,7 +60,7 @@ public class WifiSignal : MonoBehaviour
         {
             mFreeze = false;
             SwitchSpeed();
-            mIndicatorRend.enabled = false;
+
             Shader.SetGlobalVector("SignalInfo", Vector4.zero);
             if (mIndicatorVFX != null) mIndicatorVFX.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         };

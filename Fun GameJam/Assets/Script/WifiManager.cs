@@ -31,6 +31,8 @@ public class WifiManager : MonoBehaviour
     private int mWifiLayerMask = 0;
     private int _WifiLayerMask { get { if (mWifiLayerMask == 0) mWifiLayerMask = 1 << LayerMask.NameToLayer("WifiPoints"); return mWifiLayerMask; } }
 
+
+
     private static WifiManager sInstance;
     private void OnEnable()
     {
@@ -45,6 +47,7 @@ public class WifiManager : MonoBehaviour
     public static bool sIsActive => sInstance.mActive;
     public static GameObject sPrefab => sInstance.mPrefab;
     public static WifiPoint sClosestWifiPoint { get; private set; }
+    public static float sRadius { get { if (sInstance != null) return sInstance.mMinDistanceBetweenPoints; else return 2f; } }
     private void PlaceWifiPoints()
     {
         //Debug.Log("Starting placing wifi points");

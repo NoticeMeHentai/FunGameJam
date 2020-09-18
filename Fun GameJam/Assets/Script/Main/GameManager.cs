@@ -27,11 +27,12 @@ public class GameManager : MonoBehaviour
     private float mCurrentTimeLeft;
     private int mCurrentLivesLeft = 0;
     private bool mGameHasStarted = false;
+    private float mTotalScore = 0;
 
     public static bool sGameHasStarted => sInstance.mGameHasStarted;
     public static float sTimeLeft => sInstance.mCurrentTimeLeft;
     public static float sCurrentPoints => sInstance.mCurrentPoints;
-    public static float sCurrentDownloadProgress => sInstance.mCurrentDownloadProgress;
+    public static float sCurrentDownloadProgress => Mathf.Clamp01(sInstance.mCurrentDownloadProgress/sInstance.mCurrentFileBeingDownloaded.mFileSize);
     public static File sCurrentFileBeingDownloaded => sInstance.mCurrentFileBeingDownloaded;
     public static bool sCountsAsPlaying { get { if (sInstance != null) return sInstance.mCountsAsInPlay; else return false; } }
     private static GameManager sInstance;
@@ -58,6 +59,14 @@ public class GameManager : MonoBehaviour
             if (mCurrentLivesLeft == 0) OnGameOverNoLivesLeft();
         };
         SignalScanner.OnBigReconnection += delegate { mCountsAsInPlay = true; };
+
+        OnFileDonwloaded += delegate 
+        {
+            mTotalScore += mCurrentFileBeingDownloaded.mFileSize;
+            int newRandomIndex = Random.Range(0, mFileTypes.Length);
+            mCurrentFileBeingDownloaded = mFileTypes[newRandomIndex];
+            mCurrentDownloadProgress = 0;
+        };
     }
 
     private void Start()
@@ -91,19 +100,15 @@ public class GameManager : MonoBehaviour
     public static Notify OnRestart;
 
     public static Notify OnFileDonwloaded;
-
+    float progress;
     private void Update()
     {
-        if (GameManager.sGameHasStarted && SignalScanner.sIsBigConnected)
+        if (sGameHasStarted && SignalScanner.sIsBigConnected)
         {
             mCurrentDownloadProgress += SignalScanner.sCurrentDownloadingSpeed * Time.deltaTime;
-            if (mCurrentDownloadProgress >= mCurrentFileBeingDownloaded.mFileSize)
-                
-            {
-                int newRandomIndex = Random.Range(0, mFileTypes.Length);
-                mCurrentFileBeingDownloaded = mFileTypes[newRandomIndex];
-                if(OnFileDonwloaded!=null) OnFileDonwloaded();
-            }
+            progress = mCurrentDownloadProgress / mCurrentFileBeingDownloaded.mFileSize;
+            Shader.SetGlobalFloat("_DownloadRatio", progress);
+            if (mCurrentDownloadProgress >= mCurrentFileBeingDownloaded.mFileSize) OnFileDonwloaded();
         }
         if (mCountsAsInPlay)
         {
