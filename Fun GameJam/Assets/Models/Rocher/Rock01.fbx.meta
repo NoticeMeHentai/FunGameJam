@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: PM3D_Cylinder3D_5
     second: {fileID: 2100000, guid: 1677edfd05fb97449867b7699a385418, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 43482af3e49e577419f2e7691c7ef6cd, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

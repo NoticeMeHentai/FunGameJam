@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Rock05_low
     second: {fileID: 2100000, guid: b0e5ca354be4a66499c1067450a6ad6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 43482af3e49e577419f2e7691c7ef6cd, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
