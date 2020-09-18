@@ -12,6 +12,12 @@ public static class MathHelper
     private static int mGroundLayerMask = 0;
     public static int GroundLayerMask { get { if (mGroundLayerMask == 0) mGroundLayerMask = 1 << LayerMask.NameToLayer("Ground"); return mGroundLayerMask; } }
 
+    private static int mBlockersLayerMask = 0;
+    public static int BlockersLayerMask { get { if (mBlockersLayerMask == 0) mBlockersLayerMask = 1 << LayerMask.NameToLayer("Blockers"); return mBlockersLayerMask; } }
+
+
+    private static int mBlockersAndGroundLayerMask = 0;
+    public static int BlockersAndGroundLayerMask { get { if (mBlockersAndGroundLayerMask == 0) mBlockersAndGroundLayerMask = BlockersLayerMask|GroundLayerMask; return mBlockersAndGroundLayerMask; } }
 
     /// <summary>
     /// Transforms a [0,1] value into a smooth one with an smooth in (value goes from 0 to 1).

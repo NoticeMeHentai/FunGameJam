@@ -87,8 +87,8 @@ public class PlayerMovement : MonoBehaviour
 
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb == null) rb = gameObject.AddComponent<Rigidbody>();
-        rb.useGravity = false;
-        rb.isKinematic = true;
+        //rb.useGravity = false;
+        //rb.isKinematic = true;
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
 
@@ -131,12 +131,14 @@ public class PlayerMovement : MonoBehaviour
     #region Input Functions
     float lerpSpeed = 0;
     private bool mIsInMud = false;
+    float currentSpeed;
+    Vector2 movementInput;
     /// <summary>
     /// Moves the character depending on the axis values
     /// </summary>
     private void MoveAndRotate()
     {
-        Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
 
         lerpSpeed = mCurrentSpeedRatio;
@@ -180,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
             //lerpSpeed = Mathf.Clamp01(lerpSpeed - Time.deltaTime / _AccelerationTime);
             if (lerpSpeed <= 0.1f) lerpSpeed = 0f;
         }
-        float mCurrentSpeed = lerpSpeed * (1 - mSlowRatio) * (((Input.GetAxis("Run")>0.2f) && mSlowRatio==0)?mMaxRunSpeed:mMaxWalkSpeed);
+        currentSpeed = lerpSpeed * (1 - mSlowRatio) * (((Input.GetAxis("Run")>0.2f) && mSlowRatio==0)?mMaxRunSpeed:mMaxWalkSpeed);
         float speedAnimatorParameter = lerpSpeed * ((Input.GetAxis("Run") > 0.2 )? 1 : 0.5f);
         //Debug.Log("Animator value" + speedAnimatorParameter+", "+lerpSpeed);
         _Animator.SetFloat("Speed", speedAnimatorParameter);
@@ -191,27 +193,30 @@ public class PlayerMovement : MonoBehaviour
         mDirection.y = 0;
         //mDirection = Vector3.Normalize(mDirection);
 
-        if (Physics.Raycast(startingPoint, Vector3.down, out mDownHitInfo, 50f, MathHelper.GroundLayerMask) && Vector3.Distance(mDownHitInfo.point, startingPoint) > 0)
-        {
-            Debug.DrawLine(startingPoint, mDownHitInfo.point, Color.red);
-            mDirection += Vector3.up * Physics.gravity.y * Time.deltaTime; //Gravity is negative, hence the adding
-            mDirection += Vector3.up * 0.02f; //Small offset so that quads or effects placed aroung the player won't be hidden beneath the floor
-        }
         //Rotation
         if (mDirection.magnitude > 0.2f)
             transform.rotation = Quaternion.Lerp(transform.rotation,
                 Quaternion.LookRotation(mDirection), mRotationSpeed * Time.deltaTime*(1 - mSlowRatio));
-        mDirection *= mCurrentSpeed * Time.deltaTime;
+        mDirection *= currentSpeed * Time.deltaTime;
 
 
-        
+
 
         //If there's a "Object reference" error leading here, then it means something went wrong when instantiating the characters
-        if (mCurrentSpeed > 0)
+        Vector3 smoothDelta = new Vector3();
+        if (currentSpeed > 0)
         {
-            Vector3 smoothDelta = (Vector3.Lerp(transform.position, transform.position + mDirection, 45f * Time.deltaTime)) - transform.position;
-            mCharacterController.Move(smoothDelta);
+            smoothDelta = (Vector3.Lerp(transform.position, transform.position + mDirection, 45f * Time.deltaTime)) - transform.position;
         }
+        if (Physics.Raycast(startingPoint, Vector3.down, out mDownHitInfo, 50f, MathHelper.BlockersAndGroundLayerMask) && Vector3.Distance(mDownHitInfo.point, startingPoint) > 0.02f)
+        {
+            
+            Debug.DrawLine(startingPoint, mDownHitInfo.point, Color.red);
+
+            smoothDelta -= Vector3.up * mDownHitInfo.distance; //Gravity is negative, hence the adding
+            mDirection += Vector3.up * 0.02f; //Small offset so that quads or effects placed aroung the player won't be hidden beneath the floor
+        }
+            mCharacterController.Move(smoothDelta);
         mCurrentSpeedRatio = lerpSpeed;
     }
 
@@ -237,9 +242,9 @@ public class PlayerMovement : MonoBehaviour
         _Animator.SetTrigger("GetUp");
         mIsFrozen = false;
     }
-    private void Freeze(bool value)
+    public static void Stun(bool value)
     {
-        _Animator.SetTrigger("Hit");
+        sInstance._Animator.SetTrigger("Hit");
         if (OnStun!=null)OnStun();
     }
     private void Fall()

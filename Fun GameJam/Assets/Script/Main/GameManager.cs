@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour
     public static File sCurrentFileBeingDownloaded => sInstance.mCurrentFileBeingDownloaded;
     public static bool sCountsAsPlaying { get { if (sInstance != null) return sInstance.mCountsAsInPlay; else return false; } }
     private static GameManager sInstance;
-
+    public static File[] sDifferentFiles => sInstance.mFileTypes;
+    public static float sScore => sInstance.mTotalScore;
 
     private void Awake()
     {
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
 
         OnFileDonwloaded += delegate 
         {
+            mCurrentFileBeingDownloaded.mAmountDownload++;
             mTotalScore += mCurrentFileBeingDownloaded.mFileSize;
             int newRandomIndex = Random.Range(0, mFileTypes.Length);
             mCurrentFileBeingDownloaded = mFileTypes[newRandomIndex];
