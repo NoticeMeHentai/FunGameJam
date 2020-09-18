@@ -86,8 +86,12 @@ public class MapGeneration : MonoBehaviour
     {
         GameManager.OnGamePreparation += delegate { RegenerateTerrain(); };
         GameManager.OnRestart += delegate { RegenerateTerrain(); };
+        SignalScanner.OnBigDisconnection+=delegate{ };
+        SignalScanner.OnBigReconnection+=delegate{ };
+
     }
 
+    
 
     private void RegenerateTerrain()
     {
@@ -349,7 +353,7 @@ public class MapGeneration : MonoBehaviour
     }
     public void GenerateFenceBounds()
     {
-        float mFenceHeight = mHeight - 0.2f;
+        float mFenceHeight = -mHeight/6;
         for (int j = 0; j < 4; j++)
         {
             for (int i = 0; i < mFenceNbrOnSide; i++)

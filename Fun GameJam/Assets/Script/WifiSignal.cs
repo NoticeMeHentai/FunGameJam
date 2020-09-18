@@ -16,6 +16,7 @@ public class WifiSignal : MonoBehaviour
     [Header("Stuff")]
     public float mTriggerDistance = 1f;
     public MeshRenderer mIndicatorRend;
+    public ParticleSystem mIndicatorVFX;
 
 
     private WifiPoint mOriginPoint;
@@ -42,8 +43,27 @@ public class WifiSignal : MonoBehaviour
             mCurrentDirection = (mWifiPointTarget.transform.position - mOriginPoint.transform.position).normalized;
             SwitchSpeed();
         };
-        SignalScanner.OnBigDisconnection += delegate { mFreeze = true; mCurrentSpeed = 0; CancelInvoke(nameof(SwitchSpeed)); mIndicatorRend.enabled = true; };
-        SignalScanner.OnBigReconnection += delegate { mFreeze = false; SwitchSpeed(); mIndicatorRend.enabled = false; };
+        SignalScanner.OnBigDisconnection += delegate 
+        {
+            mFreeze = true;
+            mCurrentSpeed = 0;
+            CancelInvoke(nameof(SwitchSpeed));
+            mIndicatorRend.enabled = true;
+            Shader.SetGlobalVector("SignalInfo", new Vector4(transform.position.x, transform.position.z, SignalScanner.sDistanceToBigReconnect, 1));
+            if (mIndicatorVFX != null)
+            {
+                mIndicatorVFX.transform.position = transform.position;
+                mIndicatorVFX.Play(); 
+            }
+        };
+        SignalScanner.OnBigReconnection += delegate 
+        {
+            mFreeze = false;
+            SwitchSpeed();
+            mIndicatorRend.enabled = false;
+            Shader.SetGlobalVector("SignalInfo", Vector4.zero);
+            if (mIndicatorVFX != null) mIndicatorVFX.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        };
 
     }
 
