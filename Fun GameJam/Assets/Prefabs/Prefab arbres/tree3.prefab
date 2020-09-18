@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6611223912733011102}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Putain_de_feuillage:Plane.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7357040254656238862}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Putain_de_feuillage:transform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 99073521809800957}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: putain_de_tronc:polySurface1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8346300744648549863}
-  m_Layer: 0
+  - component: {fileID: 276534617792601167}
+  m_Layer: 10
   m_Name: tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +116,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5012327810971998196}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.97, y: 2.22, z: -28.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -125,6 +126,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &276534617792601167
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5012327810971998196}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &5781165745334813188
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +151,7 @@ GameObject:
   - component: {fileID: 4057481233601893728}
   - component: {fileID: 4455943165584626980}
   - component: {fileID: 8874337751405918455}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Putain_de_feuillage:Plane.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7671167576791355260}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Putain_de_feuillage:transform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

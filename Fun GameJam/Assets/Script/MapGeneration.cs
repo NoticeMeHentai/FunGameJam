@@ -349,7 +349,7 @@ public class MapGeneration : MonoBehaviour
     }
     public void GenerateFenceBounds()
     {
-        float mFenceHeight = mHeight - 0.2f;
+        float mFenceHeight = -mHeight/6;
         for (int j = 0; j < 4; j++)
         {
             for (int i = 0; i < mFenceNbrOnSide; i++)

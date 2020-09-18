@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1839275202164485148}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane.023
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2750244424551975410}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: transform3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8724226435585500843}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4762518571658014555}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: transform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2440255957094704966}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: group1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 326858095517493058}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Arbre_1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7105989207758437273}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: transform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 6199822254085367733}
   - component: {fileID: 3196014279865871710}
   - component: {fileID: 4161345595639567356}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Arbre_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5559998694783822696}
-  m_Layer: 0
+  - component: {fileID: 4735076134971429165}
+  m_Layer: 10
   m_Name: tree2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +317,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8895256336274512251}
-  m_LocalRotation: {x: -0, y: -0.24880214, z: -0, w: 0.9685543}
+  m_LocalRotation: {x: 0, y: -0.24879973, z: 0, w: 0.968555}
   m_LocalPosition: {x: 0.06, y: 2.22, z: -24.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -326,3 +327,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -28.813002, z: 0}
+--- !u!136 &4735076134971429165
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8895256336274512251}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}

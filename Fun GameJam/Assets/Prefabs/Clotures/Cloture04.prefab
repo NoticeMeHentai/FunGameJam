@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3530121190566853942}
   - component: {fileID: 8031437413430365328}
   - component: {fileID: 2272101570277226548}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311953489826795372}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.061988715, z: -0.010010954}
+  m_LocalPosition: {x: 0, y: 0.06674122, z: 0.042181674}
   m_LocalScale: {x: 1, y: 1, z: 1.4675615}
   m_Children: []
   m_Father: {fileID: 5841449105618671333}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 6528743905340922449}
   - component: {fileID: 2832465326604507743}
   - component: {fileID: 6398095075888071102}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3268031057409504178}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0021412692, y: -0.00012783319, z: 0.027403811}
+  m_LocalPosition: {x: -0.0021412692, y: 0.0046246755, z: 0.07959644}
   m_LocalScale: {x: 0.43068242, y: 0.43068242, z: 0.43068242}
   m_Children: []
   m_Father: {fileID: 5841449105618671333}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 5974733083824119164}
   - component: {fileID: 6447778321682391967}
   - component: {fileID: 2948928170915197897}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6161906359194558088}
   m_LocalRotation: {x: -0.0024157134, y: 0, z: -0, w: 0.9999971}
-  m_LocalPosition: {x: 0.002939171, y: 0.041545585, z: -0.010010954}
+  m_LocalPosition: {x: 0.002939171, y: 0.046298094, z: 0.042181674}
   m_LocalScale: {x: 1.4490744, y: 1, z: 1.4675615}
   m_Children: []
   m_Father: {fileID: 5841449105618671333}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 8737486067941701097}
   - component: {fileID: 6397654684130158285}
   - component: {fileID: 8516448134667022938}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6699037553513804126}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0021412692, y: -0.00012783319, z: -0.052892625}
+  m_LocalPosition: {x: -0.0021412692, y: 0.0046246755, z: -0.00069999753}
   m_LocalScale: {x: 0.43068242, y: 0.43068242, z: 0.43068242}
   m_Children: []
   m_Father: {fileID: 5841449105618671333}
@@ -317,7 +317,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5841449105618671333}
-  m_Layer: 0
+  - component: {fileID: 1448454819991241588}
+  m_Layer: 10
   m_Name: Cloture04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +332,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7443226272152052982}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.253, y: 2.172, z: -12.818}
   m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children:
@@ -343,6 +344,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1448454819991241588
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443226272152052982}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.009886287, y: 0.08859761, z: 0.11151963}
+  m_Center: {x: -0.002344886, y: 0.044475887, z: 0.041427106}
 --- !u!1 &7648393296541649938
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +368,7 @@ GameObject:
   - component: {fileID: 8402294398934078610}
   - component: {fileID: 8424451848401863573}
   - component: {fileID: 7612492360976751815}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7648393296541649938}
   m_LocalRotation: {x: -0.08122955, y: 0, z: -0, w: 0.99669546}
-  m_LocalPosition: {x: -0, y: 0.0066804644, z: -0.019657036}
+  m_LocalPosition: {x: 0, y: 0.011432974, z: 0.03253559}
   m_LocalScale: {x: 1, y: 1, z: 1.4675615}
   m_Children: []
   m_Father: {fileID: 5841449105618671333}
