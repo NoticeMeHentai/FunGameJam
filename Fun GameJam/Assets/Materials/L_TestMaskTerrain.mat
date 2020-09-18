@@ -83,6 +83,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RadarRatio: 0.176
+    - _SignalBigDisconnectionBool: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -92,5 +93,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SignalPos: {r: 0, g: 0, b: 0, a: 0}
     - _Vector0: {r: 0, g: 10, b: 0, a: 0}
     - _Vector1: {r: 0, g: 0, b: 0, a: 0}

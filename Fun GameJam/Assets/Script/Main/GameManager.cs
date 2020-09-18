@@ -26,12 +26,14 @@ public class GameManager : MonoBehaviour
     private bool mCountsAsInPlay = false;
     private float mCurrentTimeLeft;
     private int mCurrentLivesLeft = 0;
+    private bool mGameHasStarted = false;
 
+    public static bool sGameHasStarted => sInstance.mGameHasStarted;
     public static float sTimeLeft => sInstance.mCurrentTimeLeft;
     public static float sCurrentPoints => sInstance.mCurrentPoints;
     public static float sCurrentDownloadProgress => sInstance.mCurrentDownloadProgress;
     public static File sCurrentFileBeingDownloaded => sInstance.mCurrentFileBeingDownloaded;
-    public static bool sCountsAsPlaying => sInstance.mCountsAsInPlay;
+    public static bool sCountsAsPlaying { get { if (sInstance != null) return sInstance.mCountsAsInPlay; else return false; } }
     private static GameManager sInstance;
 
 
@@ -41,13 +43,14 @@ public class GameManager : MonoBehaviour
         sInstance = this;
         OnGamePreparation += delegate
          {
+             HUDManager.Enable(true);
              int randomIndex = Random.Range(0, mFileTypes.Length);
              mCurrentFileBeingDownloaded = mFileTypes[randomIndex];
              mCurrentTimeLeft = mMaxTime;
              mCurrentLivesLeft = mMaxLives;
          };
 
-        OnGameReady += delegate { mCountsAsInPlay = false; };
+        OnGameReady += delegate { mCountsAsInPlay = true; mGameHasStarted = true; };
         SignalScanner.OnBigDisconnection += delegate 
         {
             mCountsAsInPlay = false;
@@ -59,9 +62,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+            StartCoroutine(TemporaryStart()); 
         if (!mHasMenu)
         {
-            StartCoroutine(TemporaryStart()); 
         }
     }
 
@@ -89,10 +92,9 @@ public class GameManager : MonoBehaviour
 
     public static Notify OnFileDonwloaded;
 
-
     private void Update()
     {
-        if (SignalScanner.sIsConnected)
+        if (GameManager.sGameHasStarted && SignalScanner.sIsBigConnected)
         {
             mCurrentDownloadProgress += SignalScanner.sCurrentDownloadingSpeed * Time.deltaTime;
             if (mCurrentDownloadProgress >= mCurrentFileBeingDownloaded.mFileSize)
