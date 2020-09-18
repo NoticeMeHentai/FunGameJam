@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+#if UNITY_EDITOR
+using UnityEditor; 
+#endif
 
 public class Bees : MonoBehaviour
 {
@@ -10,13 +13,13 @@ public class Bees : MonoBehaviour
 
     private GameObject mBees;
     private bool PlayerSet = false;
-    public GameObject mPlayer;
     private float mDistanceDetection = 5.0f;
     public bool mDetectionStart = true;
     private float mBeeSpeed = 2.0f;
     private bool mReturn = false;
     public bool mHaveHitPlayer = false;
     private bool mCanAttack = true;
+    public float mDistanceBeforeStun = 0.2f;
 
     private float mWaitTimeBeforeBack = 2.0f;
     private float mWaitTimeBeforeAttack = 8.0f;
@@ -29,47 +32,39 @@ public class Bees : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!PlayerSet/* && playerRefAccess != null*/)
+        if (mCanAttack && !mHaveHitPlayer && (PlayerMovement.Position - mBeesAnchor.transform.position).magnitude < mDistanceDetection)
         {
-            PlayerSet = true; 
-            //mPlayer = playerRefAccess;
+            mReturn = false;
+            if (mDetectionStart)
+            {
+                mDetectionStart = false;
+            }
+            mBees.transform.position += (PlayerMovement.Position - mBees.transform.position).normalized * Time.deltaTime * mBeeSpeed;
         }
-        if (mPlayer != null)
+        else if (!mDetectionStart)
         {
-            if (mCanAttack && !mHaveHitPlayer && (mPlayer.transform.position - mBeesAnchor.transform.position).magnitude < mDistanceDetection)
+            Debug.Log("test");
+            mDetectionStart = true;
+            StartCoroutine(WaitSomeTime(mWaitTimeBeforeBack));
+        }
+        if ((PlayerMovement.Position - mBees.transform.position).magnitude < mDistanceBeforeStun)
+        {
+            if (!mHaveHitPlayer)
             {
-                mReturn = false;
-                if (mDetectionStart)
-                {
-                    mDetectionStart = false;
-                }
-                mBees.transform.position += (mPlayer.transform.position - mBees.transform.position).normalized * Time.deltaTime * mBeeSpeed;
+                mCanAttack = false;
+                mHaveHitPlayer = true;
+                PlayerMovement.Stun(true);
             }
-            else if (!mDetectionStart)
-            {
-                Debug.Log("test");
-                mDetectionStart = true;
-                StartCoroutine(WaitSomeTime(mWaitTimeBeforeBack));
-            }
-            if ((mPlayer.transform.position - mBees.transform.position).magnitude < 0.2f)
-            {
-                if(!mHaveHitPlayer)
-                {
-                    mCanAttack = false;
-                    mHaveHitPlayer = true;
-                    //mPlayer.GetComponent<PlayerMovement>().mStun = true;
-                }
-            }
-            if (mReturn)
-            {
-                mBees.transform.position += (mBeesAnchor.transform.position - mBees.transform.position).normalized * Time.deltaTime * mBeeSpeed;
-            }
-            if (mReturn && (mBeesAnchor.transform.position - mBees.transform.position).magnitude < 0.1f)
-            {
-                StartCoroutine(WaitSomeTime2(mWaitTimeBeforeAttack));
-                mReturn = false;
-                mHaveHitPlayer = false;
-            }
+        }
+        if (mReturn)
+        {
+            mBees.transform.position += (mBeesAnchor.transform.position - mBees.transform.position).normalized * Time.deltaTime * mBeeSpeed;
+        }
+        if (mReturn && (mBeesAnchor.transform.position - mBees.transform.position).magnitude < 0.1f)
+        {
+            StartCoroutine(WaitSomeTime2(mWaitTimeBeforeAttack));
+            mReturn = false;
+            mHaveHitPlayer = false;
         }
     }
     IEnumerator WaitSomeTime(float TimeToWait)
@@ -84,4 +79,12 @@ public class Bees : MonoBehaviour
         yield return new WaitForSeconds(TimeToWait);
         mCanAttack = true;
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Handles.color = Color.white;
+        Handles.DrawWireDisc(transform.position, Vector3.up, mDistanceDetection);
+    } 
+#endif
 }

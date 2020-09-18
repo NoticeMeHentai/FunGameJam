@@ -30,11 +30,14 @@ public class MenuManager : MonoBehaviour
     public bool mEndFail = false;
     public bool mEndWin = false;
     [Range(0.0f,1.0f)] public float mDownloadRatio = 0.0f;
+    public Text mScoreLose;
+    public Text mScoreWin;
 
     private void Awake()
     {
         GameManager.OnGameOverNoLivesLeft += EndFail;
         GameManager.OnGameOverTimeRanOut += EndWin;
+        
     }
     private void Start()
     {
@@ -129,6 +132,7 @@ public class MenuManager : MonoBehaviour
 
     public void EndFail()
     {
+        mScoreLose.text = ScoreText();
         mEndFail = false;
         mEndFailMenu.SetActive(true);
         Time.timeScale = 0.0f;
@@ -138,6 +142,8 @@ public class MenuManager : MonoBehaviour
 
     public void EndWin()
     {
+
+        mScoreWin.text = ScoreText();
         mEndWin = false;
         mEndWinMenu.SetActive(true);
         Time.timeScale = 0.0f;
@@ -149,6 +155,19 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("QUIT");
         Application.Quit();
+    }
+
+    private string ScoreText()
+    {
+        string toReturn = "";
+        toReturn += "You managed to download: ";
+        for(int i = 0; i < GameManager.sDifferentFiles.Length;i++)
+        {
+            File currentFile = GameManager.sDifferentFiles[i];
+            toReturn += "\n " + currentFile.mAmountDownload + " " + currentFile.mName + " of " + currentFile.mFileSize + " units of space each one.";
+        }
+        toReturn += "\n A total of " + GameManager.sScore+" points.";
+        return toReturn;
     }
 
 }

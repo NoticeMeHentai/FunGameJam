@@ -39,6 +39,9 @@ public class SignalScanner : MonoBehaviour
     [Tooltip("The ratio in radius needed to reconnect when out for a little, not yet cut out")]
     [Range(0.5f, 1f)] public float mInnerRadiusRatioToDirectReconnect = 0.8f;
     public float mDisconnectionTimeOut = 5f;
+    public AudioSource mBipBipSource;
+    public Vector2 mMinMaxTimeWaitBetweenBips = new Vector2(0.25f, 1f);
+    public float mAddedPitchMax = 2f;
     
 
     private Quaternion mPreviousAntennaRotation;
@@ -51,6 +54,7 @@ public class SignalScanner : MonoBehaviour
     private bool mIsBigConnected = false;
     private float mTimeLeftUntilBigDisconnection = 0;
     private float mAngleDebug = 0;
+    private float mCurrentTimeWithoutBeep = 0;
 
     private Vector3 _DirectionTowardsSignal => (_SignalPosition - transform.position).normalized;
     private float _CurrentDistance => Vector3.Distance(transform.position, _SignalPosition);
@@ -104,6 +108,7 @@ public class SignalScanner : MonoBehaviour
             }
             else mCurrentDownloadingSpeed = mOverallMaxDownloadingSpeed;
         }
+
     }
 
     private void LateUpdate()
@@ -121,9 +126,22 @@ public class SignalScanner : MonoBehaviour
                     Quaternion.LookRotation(worldDirection), mRotationAntennaSpeed * Time.deltaTime);
             mPreviousAntennaRotation = mAntennaTransform.rotation; 
         }
-
+        if (mIsBigConnected)
+        {
+            float mDistanceRatio = 1 - Mathf.InverseLerp(mMinMaxConnectionDistance.y, mMinMaxConnectionDistance.x, _CurrentDistance);
+            float bipbipTime = mMinMaxTimeWaitBetweenBips.Lerp(mDistanceRatio);
+            if (mCurrentTimeWithoutBeep > bipbipTime)
+            {
+                Debug.Log("Bip!");
+                mBipBipSource.pitch = 1 + (1-mDistanceRatio) * mAddedPitchMax;
+                mBipBipSource.Play();
+                mCurrentTimeWithoutBeep = 0;
+            }
+            else mCurrentTimeWithoutBeep += Time.deltaTime;
+        }
         if (mIsScanning)
         {
+
             mScannerPivot.rotation = mScannerRotation;
         }
     }
