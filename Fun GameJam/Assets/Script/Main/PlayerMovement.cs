@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    public static GameManager.Notify OnFreeze;
+    public static GameManager.Notify OnStun;
     public static GameManager.Notify OnUnfreeze;
 
     #endregion
@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
 
-        OnFreeze += delegate { mIsFrozen = true; };
+        OnStun += delegate { mIsFrozen = true;  Invoke(nameof(Unfreeze), mBiteStunTime); };
         OnUnfreeze += delegate { mIsFrozen = false; };
     }
 
@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
 
-        if (!mIsFrozen)
+        if (!mIsFrozen && GameManager.sGameHasStarted)
         {
             MoveAndRotate();
         }
@@ -160,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
                 _Animator.SetBool("Slow", false);
             }
             mSlowRatio = col.g * mMudSlowness;
-            Debug.Log("Slow:" + col.g);
+            //Debug.Log("Slow:" + col.g);
 
         }
 
@@ -219,11 +219,12 @@ public class PlayerMovement : MonoBehaviour
     private void Unfreeze()
     {
         _Animator.SetTrigger("GetUp");
+        mIsFrozen = false;
     }
     private void Freeze(bool value)
     {
         _Animator.SetTrigger("Hit");
-        if (OnFreeze!=null)OnFreeze();
+        if (OnStun!=null)OnStun();
     }
     private void Fall()
     {
@@ -232,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator FallCoroutine()
     {
-        if (OnFreeze != null) OnFreeze();
+        if (OnStun != null) OnStun();
         _Animator.SetTrigger("Fall");
         yield return new WaitForSeconds(mFlatTime);
         _Animator.SetTrigger("GetUp");
