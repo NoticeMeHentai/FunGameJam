@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7922780981007429932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41384175580990427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8fbc700ee153042b37a89572695b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mBeesParticlesSystem: {fileID: 7297842431320522386, guid: 143639a67e19eee4bb5e4359da05be48,
+    type: 3}
+  mBeesAnchor: {fileID: 4290073421759693225}
+  mPlayer: {fileID: 0}
 --- !u!1 &1806896827621331675
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +110,36 @@ CapsuleCollider:
   m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!1 &4290073421759693225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7721998492885316271}
+  m_Layer: 0
+  m_Name: BeesAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7721998492885316271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290073421759693225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.24, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3947509977216006600}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8395477055549554903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -163,6 +209,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14b4ca6a82d04345801cda591d407cc, type: 3}
+--- !u!1 &41384175580990427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8363676361829288716, guid: b14b4ca6a82d04345801cda591d407cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8395477055549554903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3947509977216006600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4776883853626997023, guid: b14b4ca6a82d04345801cda591d407cc,
