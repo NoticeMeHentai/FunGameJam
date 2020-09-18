@@ -53,7 +53,7 @@ public class WifiPoint : MonoBehaviour
     {
         _Collider.radius = mRadius;
         Gizmos.color = mColorToGizmos;
-        Gizmos.DrawWireSphere(transform.position, mRadius);
+        Gizmos.DrawWireSphere(transform.position, WifiManager.sRadius);
 
         Gizmos.color = Color.red;
         for(int i = 0; i < mWifiPoints.Count; i++)

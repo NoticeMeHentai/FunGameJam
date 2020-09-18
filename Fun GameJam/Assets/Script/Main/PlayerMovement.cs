@@ -62,6 +62,9 @@ public class PlayerMovement : MonoBehaviour
         mSlowRatio = 1f;
 
         GameManager.OnGameReady += delegate { mSlowRatio = 0f; transform.position = WifiManager.sClosestWifiPoint.transform.position; };
+        GameManager.OnGameOverTimeRanOut += delegate { mIsFrozen = true; };
+        GameManager.OnGameOverNoLivesLeft += delegate { mIsFrozen = true; };
+        GameManager.OnRestart += delegate { mSlowRatio = 0f; transform.position = WifiManager.sClosestWifiPoint.transform.position; mIsFrozen = false; };
         if (sInstance != null)
         {
             Debug.Log("[Player] There was already an instance, wtf");
@@ -95,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+
     }
 
 
@@ -142,11 +146,11 @@ public class PlayerMovement : MonoBehaviour
 
         //Gravity simulation
         Vector3 startingPoint = transform.position + Vector3.up * 0.4f;
-        if (Physics.Raycast(startingPoint, Vector3.down, out mDownHitInfo, 50f, MathHelper.GroundLayerMask) && Vector3.Distance(mDownHitInfo.point, startingPoint) > 0)
+        if (Physics.Raycast(startingPoint, Vector3.down, out mDownHitInfo, 50f, MathHelper.GroundLayerMask))
         {
-            Debug.DrawLine(startingPoint, mDownHitInfo.point, Color.red);
-            mDirection += Vector3.up * Physics.gravity.y * Time.deltaTime; //Gravity is negative, hence the adding
-            mDirection += Vector3.up * 0.02f; //Small offset so that quads or effects placed aroung the player won't be hidden beneath the floor
+            //Debug.DrawLine(startingPoint, mDownHitInfo.point, Color.red);
+            //mDirection += Vector3.up * Physics.gravity.y * Time.deltaTime; //Gravity is negative, hence the adding
+            //mDirection += Vector3.up * 0.02f; //Small offset so that quads or effects placed aroung the player won't be hidden beneath the floor
             Vector2 texUV = mDownHitInfo.textureCoord.Rotate(MapGeneration.sAngle, MapGeneration.sPivot);
             Color col = MapGeneration.sTexture.GetPixelBilinear(1 - texUV.x, 1 - texUV.y);
             if (col.g > 0.5f && !mIsInMud)
@@ -187,10 +191,14 @@ public class PlayerMovement : MonoBehaviour
         mDirection.y = 0;
         //mDirection = Vector3.Normalize(mDirection);
 
-        
-
+        if (Physics.Raycast(startingPoint, Vector3.down, out mDownHitInfo, 50f, MathHelper.GroundLayerMask) && Vector3.Distance(mDownHitInfo.point, startingPoint) > 0)
+        {
+            Debug.DrawLine(startingPoint, mDownHitInfo.point, Color.red);
+            mDirection += Vector3.up * Physics.gravity.y * Time.deltaTime; //Gravity is negative, hence the adding
+            mDirection += Vector3.up * 0.02f; //Small offset so that quads or effects placed aroung the player won't be hidden beneath the floor
+        }
         //Rotation
-        if (mDirection.magnitude > 0.01f)
+        if (mDirection.magnitude > 0.2f)
             transform.rotation = Quaternion.Lerp(transform.rotation,
                 Quaternion.LookRotation(mDirection), mRotationSpeed * Time.deltaTime*(1 - mSlowRatio));
         mDirection *= mCurrentSpeed * Time.deltaTime;
@@ -205,6 +213,14 @@ public class PlayerMovement : MonoBehaviour
             mCharacterController.Move(smoothDelta);
         }
         mCurrentSpeedRatio = lerpSpeed;
+    }
+
+    private void LateUpdate()
+    {
+        Vector3 euler = transform.rotation.eulerAngles;
+        euler.x = 0;
+        euler.z = 0;
+        transform.rotation = Quaternion.Euler(euler);
     }
 
 

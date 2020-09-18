@@ -58,7 +58,8 @@ public class SignalScanner : MonoBehaviour
 
     private static SignalScanner sInstance;
 
-    public static float sCurrentDownloadingSpeed { get; private set; }
+    private float mCurrentDownloadingSpeed;
+    public static float sCurrentDownloadingSpeed => sInstance.mCurrentDownloadingSpeed;
     public static bool sIsBigConnected => sInstance.mIsBigConnected;
     public static float sTimeLeftUntilBigDisconnection => sInstance.mTimeLeftUntilBigDisconnection;
     public static float sDistanceToBigReconnect => sInstance.mMinMaxConnectionDistance.x;
@@ -76,25 +77,32 @@ public class SignalScanner : MonoBehaviour
         GameManager.OnGameReady += delegate { StartScan(); mIsDirectlyConnected = true; mIsBigConnected = true; };
         OnBigDisconnection += delegate { mIsBigConnected = false; mIsDirectlyConnected = false; mKeepScanning = false; };
         OnBigReconnection += delegate { mIsBigConnected = true;  mIsDirectlyConnected = true; mKeepScanning = true; };
-        OnDirectReconnection += delegate { mIsDirectlyConnected = true; mIsBigConnected = true; StopCoroutine(nameof(DisconnectionCountdown)); };
-        OnDirectDisconnection += delegate { mIsDirectlyConnected = false; };
+        OnDirectReconnection += delegate { mIsDirectlyConnected = true; mIsBigConnected = true; StopCoroutine(nameof(DisconnectionCountdown));  };
+        OnDirectDisconnection += delegate { mIsDirectlyConnected = false; mTimeLeftUntilBigDisconnection = mDisconnectionTimeOut; mCurrentDownloadingSpeed = 0f; StartCoroutine(nameof(DisconnectionCountdown)); };
         mPreviousAntennaRotation = mAntennaTransform.rotation;
     }
-
+    private float mDownloadByDistance;
+    private float mDownloadByAiming;
     private void Update()
     {
         float mDistanceRatio = _CurrentDistance / mMinMaxConnectionDistance.y;
-        if (!mIsDirectlyConnected && !mIsBigConnected && mDistanceRatio < mInnerRadiusRatioToDirectReconnect) OnDirectReconnection();
+        if (!mIsDirectlyConnected && mIsBigConnected && mDistanceRatio < mInnerRadiusRatioToDirectReconnect)
+            OnDirectReconnection();
+        else if (mIsDirectlyConnected && mIsBigConnected && _CurrentDistance > mMinMaxConnectionDistance.y)
+            OnDirectDisconnection();
+        else if (!mIsDirectlyConnected && !mIsBigConnected && _CurrentDistance < mMinMaxConnectionDistance.x)
+            OnBigReconnection();
         else if (mIsDirectlyConnected)
         {
-            CheckMaxConnection(_CurrentDistance < mMinMaxConnectionDistance.x);
-            if(!mMaxConnection)
+            mMaxConnection = _CurrentDistance < mMinMaxConnectionDistance.x;
+            if (!mMaxConnection)
             {
-                float downloadByDistance = Mathf.Clamp01(mDistanceSignalCurve.Evaluate(mMinMaxConnectionDistance.InverseLerp(_CurrentDistance)));
-                float downloadByAiming = Mathf.Clamp01(mAimingSignalCurve.Evaluate(mMinMaxSignalAngles.InverseLerp(_CurrentAngle)));
+                float mDownloadByDistance = Mathf.Clamp01(1-mDistanceSignalCurve.Evaluate(mMinMaxConnectionDistance.InverseLerp(_CurrentDistance)));
+                float mDownloadByAiming = Mathf.Clamp01(1-mAimingSignalCurve.Evaluate(mMinMaxSignalAngles.InverseLerp(_CurrentAngle)));
 
-                sCurrentDownloadingSpeed = Mathf.Max(downloadByDistance * mMaxDownloadingSpeedByDistance + downloadByAiming * mMaxDownloadingSpeedByAiming, mOverallMaxDownloadingSpeed);
+                mCurrentDownloadingSpeed = Mathf.Min(mDownloadByDistance * mMaxDownloadingSpeedByDistance + mDownloadByAiming * mMaxDownloadingSpeedByAiming, mOverallMaxDownloadingSpeed);
             }
+            else mCurrentDownloadingSpeed = mOverallMaxDownloadingSpeed;
         }
     }
 
@@ -106,6 +114,7 @@ public class SignalScanner : MonoBehaviour
         //Antenna rotation
         if (direction.magnitude>0)
         {
+
             direction = direction.LimitMagnitude(1f);
             Vector3 worldDirection = (direction.x * CameraManager.RightDirection + direction.y * CameraManager.ForwardDirection).normalized;
             mAntennaTransform.rotation = Quaternion.Lerp(mPreviousAntennaRotation,
@@ -122,17 +131,6 @@ public class SignalScanner : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!sIsBigConnected && !GameManager.sCountsAsPlaying && other.CompareTag("Signal")) OnBigReconnection();
-    }
-
-
-
-    private void CheckMaxConnection(bool reached)
-    {
-        if (reached)
-        {
-            sCurrentDownloadingSpeed = mOverallMaxDownloadingSpeed;
-            mMaxConnection = true;
-        }
     }
 
     private void StartScan()
@@ -163,6 +161,7 @@ public class SignalScanner : MonoBehaviour
 
             mScannerMaterial.SetFloat("_MaxWifi", downloadByDistance);
             mScannerMaterial.SetColor("_Color", mScannerColorGradient.Evaluate(downloadByAiming));
+            
 
             while (currentTime < mScannerDuration)
             {
