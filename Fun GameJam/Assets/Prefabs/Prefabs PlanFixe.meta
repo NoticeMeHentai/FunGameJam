@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Fun GameJam/Assets/Prefabs/Prefabs PlanFixe.meta
 guid: e3ac5bbc0b2675642bc030ffa79d45f3
+=======
+guid: 679fc45ddf7a357428a6c86fce457b0a
+>>>>>>> f35dbf6c12cb72cb23b0e97aaa9576b3aad9a41a:Fun GameJam/Assets/Map.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

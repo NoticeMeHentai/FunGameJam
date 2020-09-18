@@ -36,6 +36,8 @@ public class MenuManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(mMainMenuFirstSelected);
         mDownloadText = mDownloadBar.transform.GetChild(0).GetComponent<Text>();
+        HUDManager.Enable(false);
+        
     }
     private void Update()
     {
@@ -50,10 +52,10 @@ public class MenuManager : MonoBehaviour
             mWifiLostLogo.SetActive(false);
         }
         mDownloadBar.GetComponent<Image>().material.SetFloat("_DownloadRatio", mDownloadRatio);
-        if(mDownloading)
-        {
-            mDownloadText.text = "Downloading" + new string('.', Mathf.FloorToInt((Time.time* mDownloadSpeed) % 3) + 1);
-        }
+        //if(mDownloading)
+        //{
+        //    mDownloadText.text = "Downloading" + new string('.', Mathf.FloorToInt((Time.time* mDownloadSpeed) % 3) + 1);
+        //}
         if (Input.GetAxis("HorizontalMenu") > 0)
         {
             Debug.Log("a");
@@ -99,6 +101,7 @@ public class MenuManager : MonoBehaviour
 
     public void PlayGame()
     {
+        if(!SceneManager.GetSceneByBuildIndex(1).isLoaded)
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Additive);
         sInMainMenu = false;
         Time.timeScale = 1.0f;

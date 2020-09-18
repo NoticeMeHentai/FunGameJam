@@ -86,8 +86,12 @@ public class MapGeneration : MonoBehaviour
     {
         GameManager.OnGamePreparation += delegate { RegenerateTerrain(); };
         GameManager.OnRestart += delegate { RegenerateTerrain(); };
+        SignalScanner.OnBigDisconnection+=delegate{ };
+        SignalScanner.OnBigReconnection+=delegate{ };
+
     }
 
+    
 
     private void RegenerateTerrain()
     {
