@@ -102,6 +102,7 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Additive);
         sInMainMenu = false;
         Time.timeScale = 1.0f;
+        mDownloadText = mDownloadBar.transform.GetChild(0).GetComponent<Text>();
     }
 
     public void Resume()

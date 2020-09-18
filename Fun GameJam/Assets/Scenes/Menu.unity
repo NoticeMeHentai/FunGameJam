@@ -4300,7 +4300,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   mDownloadIconRef: {fileID: 0}
   mDownloadFolder: {fileID: 0}
-  mDownloadBarMat: {fileID: 0}
+  mDownloadBarMat: {fileID: 2100000, guid: 033dfb4f92681614eab9d720df1642db, type: 2}
   mWifiSignalLost: {fileID: 0}
   mTimerCountdown: {fileID: 0}
 --- !u!1 &1793942249
