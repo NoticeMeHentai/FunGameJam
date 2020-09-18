@@ -163,7 +163,7 @@ public class MapGeneration : MonoBehaviour
                         else if (fzPos > (1f - mBorderHeightmapDown))
                             heightBorderInfluence = 1f - Mathf.InverseLerp(1 - mBorderHeightmapDown, 1f, fzPos);
 
-                        float target = mHeightMapSelected.GetPixelBilinear(1.0f - uvPos.x, 1.0f - uvPos.y).g;
+                        float target = mHeightMapSelected.GetPixelBilinear(1.0f - uvPos.x, 1.0f - uvPos.y).r;
                         height = mHeight * target* heightBorderInfluence;
                     }
                     catch (System.Exception)
